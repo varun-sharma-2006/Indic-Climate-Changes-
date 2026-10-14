@@ -1,0 +1,29 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# large / regenerable artefacts
+runs/*/best/
+runs/*/best_adapter/
+runs/*/model.pkl
+data/external/raw/
+data/translated/*.csv
+*.safetensors
+*.bin
+*.zip
+
+# official data may not be redistributable - keep out of the public repo unless organisers allow
+data/official/*
+!data/official/README.md
+data/processed/official_*.csv
+submissions/
+data/augmented/
+
+# third-party dataset copies: regenerate with  python -m stance.download_external  /  stance.build_dataset
+data/external/processed/*.csv
+data/processed/
+reports/eda/*/features.csv
+runs/*/pred_valid.csv
+node_modules/

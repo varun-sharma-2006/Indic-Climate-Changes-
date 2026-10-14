@@ -1,0 +1,65 @@
+id,text,label,lang,source,phenomenon
+ch000,"ग्लोबल वार्मिंग सच में बहुत गंभीर समस्या है, अभी नहीं संभले तो बहुत देर हो जाएगी।",Favour,hi,challenge_v1,explicit
+ch001,"हर साल गर्मी बढ़ती जा रही है, ये जलवायु परिवर्तन का ही असर है। सरकार को कुछ करना चाहिए।",Favour,hi,challenge_v1,explicit
+ch002,"पेड़ लगाओ, पानी बचाओ, वरना आने वाली पीढ़ी हमें माफ़ नहीं करेगी 🙏",Favour,hi,challenge_v1,implicit
+ch003,इस बार दिल्ली में 50 डिग्री पार... भगवान ही बचाए अब तो 😰,Favour,hi,challenge_v1,implicit
+ch004,ग्लेशियर पिघल रहे हैं और हम अभी भी सो रहे हैं।,Favour,hi,challenge_v1,implicit
+ch005,"ग्लोबल वार्मिंग सब झूठ है, ये बस विदेशी कंपनियों का प्रोपेगेंडा है।",Against,hi,challenge_v1,explicit
+ch006,"गर्मी तो हमेशा से पड़ती आई है, इसमें नया क्या है? फालतू का डर फैला रहे हैं।",Against,hi,challenge_v1,implicit
+ch007,"जलवायु परिवर्तन कोई बड़ी समस्या नहीं है, असली समस्या तो बेरोज़गारी है।",Against,hi,challenge_v1,negation
+ch008,ये सब पश्चिमी देशों का नाटक है ताकि भारत का विकास रुक जाए।,Against,hi,challenge_v1,implicit
+ch009,"हमारे दादा जी के ज़माने में भी इतनी ही गर्मी थी, सब बकवास है।",Against,hi,challenge_v1,explicit
+ch010,"जो लोग कहते हैं कि ग्लोबल वार्मिंग असली नहीं है, वो बिल्कुल गलत हैं।",Favour,hi,challenge_v1,negation
+ch011,"ये मज़ाक नहीं है, जलवायु संकट सच में हमारे दरवाज़े पर है।",Favour,hi,challenge_v1,negation
+ch012,कौन कहता है कि मौसम नहीं बदल रहा? खिड़की से बाहर देखो।,Favour,hi,challenge_v1,rhetorical
+ch013,"भाई वीडियो बहुत अच्छा था, अगला वीडियो कब आएगा?",None,hi,challenge_v1,unrelated
+ch014,आज मैच कौन जीतेगा? इंडिया या ऑस्ट्रेलिया?,None,hi,challenge_v1,unrelated
+ch015,"कल से मुंबई में बारिश शुरू होगी, ऐसा मौसम विभाग ने कहा है।",None,hi,challenge_v1,topical-neutral
+ch016,क्या कोई बता सकता है कि ग्लोबल वार्मिंग और क्लाइमेट चेंज में क्या फर्क है?,None,hi,challenge_v1,topical-neutral
+ch017,मेरे चैनल को भी सब्सक्राइब करो 🙏🙏,None,hi,challenge_v1,unrelated
+ch018,"हाँ हाँ, ग्लोबल वार्मिंग से तो दुनिया कल ही खत्म हो जाएगी 🙄😂",Against,hi,challenge_v1,sarcasm
+ch019,वाह! इतनी ठंड में भी ग्लोबल वार्मिंग? कमाल है 😂,Against,hi,challenge_v1,sarcasm
+ch020,"बढ़िया है, पेड़ काटते रहो, मॉल बनाते रहो, फिर AC में बैठ के रोना कि गर्मी बहुत है 👏",Favour,hi,challenge_v1,sarcasm
+ch021,ग्लोबल वार्मिग बहोत खतरनाक हे भाई!!!! 😱😱,Favour,hi,challenge_v1,typo
+ch022,"पहले देश की गरीबी दूर करो, ये ग्लोबल वार्मिंग वगैरह बाद में देखेंगे।",Against,hi,challenge_v1,implicit
+ch023,"ठंड हो या गर्मी, मौसम का मज़ा लो दोस्तों 😎",None,hi,challenge_v1,topical-neutral
+ch024,Climate change का सबसे बड़ा असर गरीबों पर पड़ता है,Favour,hi,challenge_v1,codemix-script
+ch025,"global warming bahut serious problem hai yaar, sabko milke kuch karna chahiye",Favour,hi-rom,challenge_v1,romanized
+ch026,"ye sab jhooth hai bhai, garmi to har saal padti hai",Against,hi-rom,challenge_v1,romanized
+ch027,climate change ek fake agenda hai western countries ka,Against,hi-rom,challenge_v1,codemix
+ch028,bhai video ka music konsa hai?,None,hi-rom,challenge_v1,unrelated
+ch029,"paani khatam ho raha hai, ped kat rahe hain, phir bhi log samajh nahi rahe",Favour,hi-rom,challenge_v1,implicit
+ch030,"garmi bohot zyada hai aaj, AC chala ke so jao 😂",None,hi-rom,challenge_v1,hard-none
+ch031,"Climate change real hai, koi mazak nahi hai ye",Favour,hi-rom,challenge_v1,negation
+ch032,itni thand pad rahi hai aur ye log global warming bol rahe hain 🤣,Against,hi-rom,challenge_v1,sarcasm
+ch033,"jalvayu parivartan pe dhyan do sarkaar, bachcho ka future khatre mein hai",Favour,hi-rom,challenge_v1,romanized
+ch034,"বিশ্ব উষ্ণায়ন সত্যিই একটা ভয়ঙ্কর সমস্যা, এখনই ব্যবস্থা নেওয়া দরকার।",Favour,bn,challenge_v1,explicit
+ch035,"প্রতি বছর গরম বাড়ছে, এটা জলবায়ু পরিবর্তনেরই ফল।",Favour,bn,challenge_v1,explicit
+ch036,"গাছ কাটা বন্ধ করুন, না হলে আমাদের ভবিষ্যৎ অন্ধকার।",Favour,bn,challenge_v1,implicit
+ch037,"সুন্দরবন ডুবে যাচ্ছে, আর আমরা চুপ করে বসে আছি।",Favour,bn,challenge_v1,implicit
+ch038,"নদীর জল শুকিয়ে যাচ্ছে, কৃষকরা চাষ করতে পারছে না। এভাবে চললে কী হবে?",Favour,bn,challenge_v1,implicit
+ch039,"সরকার কিছু করবে না, আমাদেরই পরিবেশ বাঁচাতে হবে।",Favour,bn,challenge_v1,implicit
+ch040,"গ্লোবাল ওয়ার্মিং সব মিথ্যা কথা, বিদেশিদের ষড়যন্ত্র।",Against,bn,challenge_v1,explicit
+ch041,"গরম তো আগেও পড়ত, এখন সবাই অযথা ভয় দেখাচ্ছে।",Against,bn,challenge_v1,implicit
+ch042,"জলবায়ু পরিবর্তন কোনো বড় সমস্যা নয়, আসল সমস্যা হলো দারিদ্র্য।",Against,bn,challenge_v1,negation
+ch043,"আগে দেশের বেকারত্ব দূর করুন, গ্লোবাল ওয়ার্মিং নিয়ে পরে ভাবা যাবে।",Against,bn,challenge_v1,implicit
+ch044,"যারা বলে বিশ্ব উষ্ণায়ন বাস্তব নয়, তারা একদম ভুল।",Favour,bn,challenge_v1,negation
+ch045,"এটা মজা নয়, জলবায়ু সংকট সত্যিই আমাদের দোরগোড়ায়।",Favour,bn,challenge_v1,negation
+ch046,"দাদা ভিডিওটা দারুণ হয়েছে, পরের ভিডিও কবে আসবে?",None,bn,challenge_v1,unrelated
+ch047,আজকে খেলায় কে জিতবে বলুন তো?,None,bn,challenge_v1,unrelated
+ch048,আবহাওয়া দপ্তর বলেছে কাল থেকে কলকাতায় বৃষ্টি হবে।,None,bn,challenge_v1,topical-neutral
+ch049,"বিশ্ব উষ্ণায়ন আর জলবায়ু পরিবর্তনের মধ্যে পার্থক্য কী, কেউ বলবেন?",None,bn,challenge_v1,topical-neutral
+ch050,এই চ্যানেলটা সাবস্ক্রাইব করুন সবাই 🙏,None,bn,challenge_v1,unrelated
+ch051,"হ্যাঁ হ্যাঁ, গ্লোবাল ওয়ার্মিংয়ে কালকেই পৃথিবী শেষ হয়ে যাবে 🙄😂",Against,bn,challenge_v1,sarcasm
+ch052,এত ঠান্ডার মধ্যেও গ্লোবাল ওয়ার্মিং? বাহ্‌ 😂,Against,bn,challenge_v1,sarcasm
+ch053,"চমৎকার, পুকুর বুজিয়ে ফ্ল্যাট বানাও, তারপর গরমে কাঁদো 👏",Favour,bn,challenge_v1,sarcasm
+ch054,বিশ্ব উস্নায়ন খুব বিপজ্জনক ভাই!!!! 😱😱,Favour,bn,challenge_v1,typo
+ch055,"Global warming এর জন্য আমরাই দায়ী, নিজেরা না বদলালে কিছু হবে না",Favour,bn,challenge_v1,codemix-script
+ch056,"global warming khub serious bepar, sobai mile kichu korte hobe",Favour,bn-rom,challenge_v1,romanized
+ch057,"eta sob bhua kotha, gorom to protibochor e pore",Against,bn-rom,challenge_v1,romanized
+ch058,dada gaan ta ki chilo video te?,None,bn-rom,challenge_v1,unrelated
+ch059,"climate change ekdom real, keu eta ke mazak bhebo na",Favour,bn-rom,challenge_v1,negation
+ch060,eto thanda porche ar era bolche global warming 🤣,Against,bn-rom,challenge_v1,sarcasm
+ch061,"gorom e mara jacchi aj, ice cream khabo 😂",None,bn-rom,challenge_v1,hard-none
+ch062,Climate change is the biggest threat to our generation.,Favour,en,challenge_v1,explicit
+ch063,Global warming is a scam to tax us more.,Against,en,challenge_v1,explicit
