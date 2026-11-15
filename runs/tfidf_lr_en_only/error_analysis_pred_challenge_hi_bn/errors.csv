@@ -1,0 +1,41 @@
+id,lang,phenomenon,label,pred,confidence,has_negation,text
+ch054,bn,typo,Favour,None,0.78979,False,বিশ্ব উস্নায়ন খুব বিপজ্জনক ভাই!!!! 😱😱
+ch021,hi,typo,Favour,None,0.78979,False,ग्लोबल वार्मिग बहोत खतरनाक हे भाई!!!! 😱😱
+ch055,bn,codemix-script,Favour,Against,0.78021,True,"Global warming এর জন্য আমরাই দায়ী, নিজেরা না বদলালে কিছু হবে না"
+ch000,hi,explicit,Favour,None,0.72839,True,"ग्लोबल वार्मिंग सच में बहुत गंभीर समस्या है, अभी नहीं संभले तो बहुत देर हो जाएगी।"
+ch007,hi,negation,Against,None,0.72839,True,"जलवायु परिवर्तन कोई बड़ी समस्या नहीं है, असली समस्या तो बेरोज़गारी है।"
+ch001,hi,explicit,Favour,None,0.72839,False,"हर साल गर्मी बढ़ती जा रही है, ये जलवायु परिवर्तन का ही असर है। सरकार को कुछ करना चाहिए।"
+ch002,hi,implicit,Favour,None,0.72839,True,"पेड़ लगाओ, पानी बचाओ, वरना आने वाली पीढ़ी हमें माफ़ नहीं करेगी 🙏"
+ch005,hi,explicit,Against,None,0.72839,False,"ग्लोबल वार्मिंग सब झूठ है, ये बस विदेशी कंपनियों का प्रोपेगेंडा है।"
+ch053,bn,sarcasm,Favour,None,0.72839,False,"চমৎকার, পুকুর বুজিয়ে ফ্ল্যাট বানাও, তারপর গরমে কাঁদো 👏"
+ch043,bn,implicit,Against,None,0.72839,False,"আগে দেশের বেকারত্ব দূর করুন, গ্লোবাল ওয়ার্মিং নিয়ে পরে ভাবা যাবে।"
+ch044,bn,negation,Favour,None,0.72839,True,"যারা বলে বিশ্ব উষ্ণায়ন বাস্তব নয়, তারা একদম ভুল।"
+ch009,hi,explicit,Against,None,0.72839,False,"हमारे दादा जी के ज़माने में भी इतनी ही गर्मी थी, सब बकवास है।"
+ch035,bn,explicit,Favour,None,0.72839,False,"প্রতি বছর গরম বাড়ছে, এটা জলবায়ু পরিবর্তনেরই ফল।"
+ch034,bn,explicit,Favour,None,0.72839,False,"বিশ্ব উষ্ণায়ন সত্যিই একটা ভয়ঙ্কর সমস্যা, এখনই ব্যবস্থা নেওয়া দরকার।"
+ch011,hi,negation,Favour,None,0.72839,True,"ये मज़ाक नहीं है, जलवायु संकट सच में हमारे दरवाज़े पर है।"
+ch010,hi,negation,Favour,None,0.72839,True,"जो लोग कहते हैं कि ग्लोबल वार्मिंग असली नहीं है, वो बिल्कुल गलत हैं।"
+ch040,bn,explicit,Against,None,0.72839,False,"গ্লোবাল ওয়ার্মিং সব মিথ্যা কথা, বিদেশিদের ষড়যন্ত্র।"
+ch039,bn,implicit,Favour,None,0.72839,True,"সরকার কিছু করবে না, আমাদেরই পরিবেশ বাঁচাতে হবে।"
+ch041,bn,implicit,Against,None,0.72839,False,"গরম তো আগেও পড়ত, এখন সবাই অযথা ভয় দেখাচ্ছে।"
+ch042,bn,negation,Against,None,0.72839,True,"জলবায়ু পরিবর্তন কোনো বড় সমস্যা নয়, আসল সমস্যা হলো দারিদ্র্য।"
+ch037,bn,implicit,Favour,None,0.72839,False,"সুন্দরবন ডুবে যাচ্ছে, আর আমরা চুপ করে বসে আছি।"
+ch036,bn,implicit,Favour,None,0.72839,True,"গাছ কাটা বন্ধ করুন, না হলে আমাদের ভবিষ্যৎ অন্ধকার।"
+ch022,hi,implicit,Against,None,0.72839,False,"पहले देश की गरीबी दूर करो, ये ग्लोबल वार्मिंग वगैरह बाद में देखेंगे।"
+ch018,hi,sarcasm,Against,None,0.72839,False,"हाँ हाँ, ग्लोबल वार्मिंग से तो दुनिया कल ही खत्म हो जाएगी 🙄😂"
+ch051,bn,sarcasm,Against,None,0.72839,False,"হ্যাঁ হ্যাঁ, গ্লোবাল ওয়ার্মিংয়ে কালকেই পৃথিবী শেষ হয়ে যাবে 🙄😂"
+ch045,bn,negation,Favour,None,0.72839,True,"এটা মজা নয়, জলবায়ু সংকট সত্যিই আমাদের দোরগোড়ায়।"
+ch004,hi,implicit,Favour,None,0.72478,False,ग्लेशियर पिघल रहे हैं और हम अभी भी सो रहे हैं।
+ch008,hi,implicit,Against,None,0.72478,False,ये सब पश्चिमी देशों का नाटक है ताकि भारत का विकास रुक जाए।
+ch038,bn,implicit,Favour,None,0.72344,False,"নদীর জল শুকিয়ে যাচ্ছে, কৃষকরা চাষ করতে পারছে না। এভাবে চললে কী হবে?"
+ch006,hi,implicit,Against,None,0.72344,False,"गर्मी तो हमेशा से पड़ती आई है, इसमें नया क्या है? फालतू का डर फैला रहे हैं।"
+ch052,bn,sarcasm,Against,None,0.72321,False,এত ঠান্ডার মধ্যেও গ্লোবাল ওয়ার্মিং? বাহ্‌ 😂
+ch012,hi,rhetorical,Favour,None,0.72321,True,कौन कहता है कि मौसम नहीं बदल रहा? खिड़की से बाहर देखो।
+ch057,bn-rom,romanized,Against,None,0.69832,False,"eta sob bhua kotha, gorom to protibochor e pore"
+ch019,hi,sarcasm,Against,None,0.69762,False,वाह! इतनी ठंड में भी ग्लोबल वार्मिंग? कमाल है 😂
+ch029,hi-rom,implicit,Favour,None,0.63978,True,"paani khatam ho raha hai, ped kat rahe hain, phir bhi log samajh nahi rahe"
+ch020,hi,sarcasm,Favour,None,0.63763,False,"बढ़िया है, पेड़ काटते रहो, मॉल बनाते रहो, फिर AC में बैठ के रोना कि गर्मी बहुत है 👏"
+ch027,hi-rom,codemix,Against,Favour,0.59582,False,climate change ek fake agenda hai western countries ka
+ch026,hi-rom,romanized,Against,None,0.59563,False,"ye sab jhooth hai bhai, garmi to har saal padti hai"
+ch003,hi,implicit,Favour,None,0.56818,False,इस बार दिल्ली में 50 डिग्री पार... भगवान ही बचाए अब तो 😰
+ch032,hi-rom,sarcasm,Against,Favour,0.49106,False,itni thand pad rahi hai aur ye log global warming bol rahe hain 🤣
