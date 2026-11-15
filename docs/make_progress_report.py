@@ -33,6 +33,7 @@ ROWS = [
     ("xlmr_tt", "XLM-R", "Translate-train"),
     ("muril_tt", "MuRIL (mean pooling)", "Translate-train"),
     ("ensemble_tt", "Ensemble (mBERT + XLM-R + MuRIL)", "Translate-train"),
+    ("ensemble2_tt", "Ensemble (XLM-R + MuRIL)", "Translate-train"),
 ]
 
 
@@ -128,7 +129,7 @@ def main():
     s.alignment = WD_ALIGN_PARAGRAPH.CENTER
     s.paragraph_format.space_after = Pt(4)
     s.add_run("Varun Sharma (S24CSEU0170) · Yashika Garg (S24CSEU0235) · Priyanshu Raj (S24CSEU1142) · "
-              "Advay Sinha (S24CSEU2059)  |  Guide: Dr. Supriya Chanda  |  GitHub: [repository link]").font.size = Pt(8.5)
+              "Advay Sinha (S24CSEU2059)  |  Guide: Dr. Supriya Chanda  |  GitHub: github.com/varun-sharma-2006/Indic-Climate-Changes-").font.size = Pt(8.5)
 
     # 1. dataset
     heading(doc, "1. Dataset Description and Statistics")
@@ -180,7 +181,7 @@ def main():
         r = m[tag]["results"]
         res_rows.append([name, setting, *[f"{r[l]['macro_f1']:.3f}" for l in ("en", "hi", "bn")],
                          f"{r['hi']['accuracy']:.3f}", f"{r['bn']['accuracy']:.3f}"])
-        if tag == "ensemble_tt":
+        if tag == "muril_tt":
             bold.append(len(res_rows) - 1)
     add_table(doc, ["Model", "Training data", "F1 En", "F1 Hi", "F1 Bn", "Acc Hi", "Acc Bn"], res_rows,
               [5.2, 3.6, 1.5, 1.5, 1.5, 1.5, 1.5], bold_rows=tuple(bold))
@@ -193,6 +194,18 @@ def main():
 
     for lead, text in ANALYSIS(m, f1):
         bullet(doc, text, lead)
+    ch_path = ROOT / "results" / "challenge_set_metrics.json"
+    if ch_path.exists():
+        ch = json.loads(ch_path.read_text(encoding="utf8"))
+        bullet(doc, "On 64 hand-written Hindi/Bengali YouTube-style comments (not translations), XLM-R reaches "
+                    f"macro F1 {ch['xlmr_tt']['macro_f1']:.2f} and MuRIL {ch['muril_tt']['macro_f1']:.2f}. Explicit "
+                    "statements are always correct, but sarcasm (38% accuracy) and romanized Hindi/Bengali (20%) are "
+                    "the main weaknesses.", "Hand-written challenge set: ")
+
+    fig = ROOT / "results" / "figures" / "model_comparison.png"
+    if fig.exists():
+        doc.add_picture(str(fig), width=Cm(12.5))
+        doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     # 4. challenges
     heading(doc, "4. Challenges Encountered")
@@ -205,6 +218,9 @@ def main():
         ("Limited GPU (4 GB): ", "XLM-R and MuRIL did not fit for full fine-tuning; we freeze the word-embedding "
          "layer and use mixed precision."),
         ("Class imbalance: ", "only 13% Against; class-weighted loss and Macro F1 model selection."),
+        ("Label mismatch: ", "ClimateStance's 'ambiguous' class (which also covers sarcastic tweets) maps poorly to our "
+         "None: its F1 is below 0.15 in every language, while GWSD's neutral class reaches about 0.70-0.74 F1 "
+         "(results/error_analysis_muril_tt.md). The most common errors are Favour <-> None (55% of all errors)."),
     ]:
         bullet(doc, text, lead)
 
@@ -253,7 +269,8 @@ def ANALYSIS(m, f1):
                     f"(XLM-R best zero-shot), and translate-train changes Indic F1 by {min(gains):+.2f} to "
                     f"{max(gains):+.2f} depending on the model."))
     best = max((t for t, _, _ in ROWS if m.get(t)), key=lambda t: (f1(t, "hi") + f1(t, "bn")) / 2)
-    out.append(("Best system: ", f"{best} with Macro F1 {f1(best, 'hi'):.3f} (Hindi) and {f1(best, 'bn'):.3f} "
+    names = {t: n for t, n, _ in ROWS}
+    out.append(("Best system: ", f"{names[best]} (translate-train) with Macro F1 {f1(best, 'hi'):.3f} (Hindi) and {f1(best, 'bn'):.3f} "
                 f"(Bengali), against {f1('bert_en', 'hi'):.3f} / {f1('bert_en', 'bn'):.3f} for the base paper's model."))
     return out
 

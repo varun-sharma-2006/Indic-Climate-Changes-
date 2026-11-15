@@ -20,9 +20,11 @@ python src/train_transformer.py --model muril --train_langs en hi bn --epochs 6 
 
 # 5. ensemble of the translate-train models
 python src/ensemble.py --tags mbert_tt xlmr_tt muril_tt --name ensemble_tt
+python src/ensemble.py --tags xlmr_tt muril_tt --name ensemble2_tt
 
 # 6. explainability and summary
 python src/llm_fewshot.py                        # 4e. LLM few-shot baseline
-python src/error_analysis.py --tag ensemble_tt
-python src/explain_lime.py --model_dir models/muril_tt --n 4
+python src/error_analysis.py --tag muril_tt
+python src/eval_challenge.py --model_dirs models/xlmr_tt models/muril_tt
+python src/explain_lime.py --model_dir models/xlmr_tt --n 3 --num_samples 300
 python src/summarize_results.py

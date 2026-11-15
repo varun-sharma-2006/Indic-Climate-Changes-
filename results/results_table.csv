@@ -1,0 +1,15 @@
+experiment,model,training data,en F1,en Acc,hi F1,hi Acc,bn F1,bn Acc,avg Indic F1
+muril_tt,google/muril-base-cased,Translate-train (En+Hi+Bn),0.6554,0.7351,0.6616,0.7297,0.6496,0.7405,0.6556
+ensemble2_tt,"average of xlmr_tt, muril_tt",Ensemble,0.6675,0.7405,0.6724,0.7459,0.6264,0.7171,0.6494
+ensemble_tt,"average of mbert_tt, xlmr_tt, muril_tt",Ensemble,0.6707,0.7441,0.675,0.7423,0.62,0.7117,0.6475
+xlmr_tt,xlm-roberta-base,Translate-train (En+Hi+Bn),0.673,0.7387,0.6409,0.7207,0.6187,0.6973,0.6298
+tfidf_lr_tt,TF-IDF + LR,Translate-train (En+Hi+Bn),0.6142,0.7027,0.5919,0.6919,0.5829,0.6937,0.5874
+tfidf_svm_tt,TF-IDF + SVM,Translate-train (En+Hi+Bn),0.6013,0.7135,0.591,0.7063,0.5723,0.7009,0.5816
+mbert_tt,bert-base-multilingual-cased,Translate-train (En+Hi+Bn),0.6509,0.7117,0.5551,0.6342,0.5644,0.6559,0.5598
+muril_en,google/muril-base-cased,English only,0.6374,0.7009,0.5671,0.6126,0.5419,0.5856,0.5545
+xlmr_en,xlm-roberta-base,English only,0.6894,0.7459,0.5847,0.6288,0.4973,0.5766,0.541
+llm_qwen1.5b_fewshot,Qwen/Qwen2.5-1.5B-Instruct,Few-shot prompt (no training),0.5096,0.5676,0.4236,0.5387,0.3844,0.5333,0.404
+mbert_en,bert-base-multilingual-cased,English only,0.6538,0.7099,0.4197,0.4613,0.3462,0.3586,0.383
+bert_en,bert-base-uncased,English only,0.6675,0.7495,0.275,0.5009,0.1205,0.218,0.1978
+tfidf_svm_en,TF-IDF + SVM,English only,0.5955,0.7099,0.1754,0.2613,0.158,0.245,0.1667
+tfidf_lr_en,TF-IDF + LR,English only,0.6203,0.7117,0.1709,0.2577,0.1551,0.2432,0.163

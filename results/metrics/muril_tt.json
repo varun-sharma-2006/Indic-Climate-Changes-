@@ -1,0 +1,135 @@
+{
+  "experiment": "muril_tt",
+  "model": "google/muril-base-cased",
+  "pooling": "mean",
+  "train_langs": [
+    "en",
+    "hi",
+    "bn"
+  ],
+  "n_train": 13608,
+  "epochs": 6,
+  "lr": 3e-05,
+  "batch_size": 16,
+  "max_len": 128,
+  "best_val_macro_f1": 0.6642,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.0286,
+      "val_macro_f1": 0.6033
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8474,
+      "val_macro_f1": 0.5861
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.656,
+      "val_macro_f1": 0.6329
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.4909,
+      "val_macro_f1": 0.6642
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.367,
+      "val_macro_f1": 0.6284
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.2861,
+      "val_macro_f1": 0.6377
+    }
+  ],
+  "train_minutes": 22.4,
+  "results": {
+    "en": {
+      "macro_f1": 0.6554,
+      "accuracy": 0.7351,
+      "macro_precision": 0.648,
+      "macro_recall": 0.6656,
+      "per_class_f1": {
+        "Favour": 0.8291,
+        "Against": 0.5839,
+        "None": 0.5532
+      },
+      "confusion_matrix": [
+        [
+          296,
+          25,
+          40
+        ],
+        [
+          17,
+          47,
+          10
+        ],
+        [
+          40,
+          15,
+          65
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.6616,
+      "accuracy": 0.7297,
+      "macro_precision": 0.6469,
+      "macro_recall": 0.6844,
+      "per_class_f1": {
+        "Favour": 0.8183,
+        "Against": 0.6082,
+        "None": 0.5583
+      },
+      "confusion_matrix": [
+        [
+          286,
+          29,
+          46
+        ],
+        [
+          15,
+          52,
+          7
+        ],
+        [
+          37,
+          16,
+          67
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.6496,
+      "accuracy": 0.7405,
+      "macro_precision": 0.6587,
+      "macro_recall": 0.6417,
+      "per_class_f1": {
+        "Favour": 0.8311,
+        "Against": 0.539,
+        "None": 0.5787
+      },
+      "confusion_matrix": [
+        [
+          305,
+          20,
+          36
+        ],
+        [
+          25,
+          38,
+          11
+        ],
+        [
+          43,
+          9,
+          68
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "experiment": "ensemble2_tt",
+  "model": "average of xlmr_tt, muril_tt",
+  "members": [
+    "xlmr_tt",
+    "muril_tt"
+  ],
+  "results": {
+    "en": {
+      "macro_f1": 0.6675,
+      "accuracy": 0.7405,
+      "macro_precision": 0.6574,
+      "macro_recall": 0.6825,
+      "per_class_f1": {
+        "Favour": 0.8315,
+        "Against": 0.6303,
+        "None": 0.5408
+      },
+      "confusion_matrix": [
+        [
+          296,
+          23,
+          42
+        ],
+        [
+          14,
+          52,
+          8
+        ],
+        [
+          41,
+          16,
+          63
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.6724,
+      "accuracy": 0.7459,
+      "macro_precision": 0.663,
+      "macro_recall": 0.684,
+      "per_class_f1": {
+        "Favour": 0.835,
+        "Against": 0.6038,
+        "None": 0.5785
+      },
+      "confusion_matrix": [
+        [
+          296,
+          20,
+          45
+        ],
+        [
+          19,
+          48,
+          7
+        ],
+        [
+          33,
+          17,
+          70
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.6264,
+      "accuracy": 0.7171,
+      "macro_precision": 0.6248,
+      "macro_recall": 0.628,
+      "per_class_f1": {
+        "Favour": 0.8122,
+        "Against": 0.4966,
+        "None": 0.5702
+      },
+      "confusion_matrix": [
+        [
+          292,
+          25,
+          44
+        ],
+        [
+          28,
+          37,
+          9
+        ],
+        [
+          38,
+          13,
+          69
+        ]
+      ]
+    }
+  }
+}

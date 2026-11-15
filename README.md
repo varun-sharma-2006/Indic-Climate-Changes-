@@ -94,7 +94,53 @@ MuRIL uses **mean pooling** over all tokens instead of the `[CLS]` token, and 6 
 
 ## 4. Results
 
-RESULTS_PLACEHOLDER
+Macro F1 and accuracy on the test sets (555 examples per language). All numbers are produced by the scripts in this repo and stored in `results/metrics/*.json`; full table in [results/results_table.md](results/results_table.md).
+
+| Model | Training data | F1 English | F1 Hindi | F1 Bengali | Acc Hindi | Acc Bengali |
+|---|---|---|---|---|---|---|
+| TF-IDF + LR | English only | 0.620 | 0.171 | 0.155 | 0.258 | 0.243 |
+| **English BERT (base paper)** | English only | 0.667 | 0.275 | 0.120 | 0.501 | 0.218 |
+| mBERT | English only (zero-shot) | 0.654 | 0.420 | 0.346 | 0.461 | 0.359 |
+| XLM-R | English only (zero-shot) | 0.689 | 0.585 | 0.497 | 0.629 | 0.577 |
+| MuRIL | English only (zero-shot) | 0.637 | 0.567 | 0.542 | 0.613 | 0.586 |
+| Qwen2.5-1.5B LLM | Few-shot prompt | 0.510 | 0.424 | 0.384 | 0.539 | 0.533 |
+| TF-IDF + LR | Translate-train | 0.614 | 0.592 | 0.583 | 0.692 | 0.694 |
+| mBERT | Translate-train | 0.651 | 0.555 | 0.564 | 0.634 | 0.656 |
+| XLM-R | Translate-train | 0.673 | 0.641 | 0.619 | 0.721 | 0.697 |
+| **MuRIL (ours, best)** | Translate-train | 0.655 | **0.662** | **0.650** | 0.730 | 0.741 |
+| Ensemble mBERT+XLM-R+MuRIL | Translate-train | 0.671 | 0.675 | 0.620 | 0.742 | 0.712 |
+| Ensemble XLM-R+MuRIL | Translate-train | 0.667 | 0.672 | 0.626 | 0.746 | 0.717 |
+
+![Model comparison](results/figures/model_comparison.png)
+
+**Key findings**
+1. **Base paper reproduced:** English BERT trained on English reaches **75.0% accuracy** on English, the same as the ~75% reported by Luo et al. But on Hindi and Bengali it collapses to F1 **0.28 / 0.12**.
+2. **Our best model (MuRIL, translate-train)** reaches F1 **0.662 (Hindi)** and **0.650 (Bengali)**, about **3.3× the base paper's approach** on Indic text, while keeping English performance (0.655).
+3. **Translate-train beats zero-shot for every model**: +0.06 to +0.22 F1 on Hindi/Bengali. For TF-IDF it is the difference between useless (0.17) and usable (0.59).
+4. **Indic-specific pre-training helps:** after translate-train, MuRIL > XLM-R > mBERT on both languages.
+5. **Ensembles** help Hindi (best Hindi F1 0.675) but not Bengali, so MuRIL alone is our final model for now.
+6. **A small LLM without training** (Qwen2.5-1.5B, few-shot) is much weaker (F1 0.42 / 0.38). Fine-tuning still matters.
+
+**Hand-written challenge set** (64 Hindi/Bengali comments in YouTube style, not translations): XLM-R macro F1 **0.68**, MuRIL **0.66**. Explicit statements are 100% correct; **sarcasm (38%)** and **romanized Hindi/Bengali (20%)** are the weak points ([results/challenge_set_results.md](results/challenge_set_results.md)).
+
+**Error analysis** ([results/error_analysis_muril_tt.md](results/error_analysis_muril_tt.md)): 55% of errors are Favour ↔ None. ClimateStance's "ambiguous" class (which includes sarcastic tweets) maps poorly to our None (F1 < 0.15), while GWSD's neutral class reaches ~0.70–0.74.
+
+**Explainability** ([results/lime/summary.md](results/lime/summary.md)): LIME shows sensible cues, e.g. ঝুঁকি / खतरा ("risk/danger") → Favour, না ("not") in "গ্লোবাল ওয়ার্মিং হচ্ছে না" → Against, प्रतिशत ("percent") in survey sentences → None.
+
+### Challenges we hit (and fixes)
+| Problem | Fix |
+|---|---|
+| MuRIL predicted only "Favour" (F1 0.26): its [CLS] vector is ~identical for every sentence | Mean pooling over all tokens (`src/models.py`) |
+| ~0.4% of NLLB translations got stuck repeating a word ("ओह ओह ओह …") | Automatic detection + re-translation with repetition blocking (`translate.py --fix`) |
+| XLM-R / MuRIL do not fit in a 4 GB GPU | Frozen word embeddings + fp16 |
+| Only 13% "Against" | Class-weighted loss, Macro F1 model selection |
+| LIME split Hindi/Bengali words into letters | Whitespace tokenisation for LIME |
+
+### Next steps (before the final evaluation)
+- Label real Hindi/Bengali YouTube comments (`src/collect_youtube.py`) and evaluate on the course test set when released.
+- Transliterate romanized Hindi/Bengali to native script (IndicXlit); add sarcasm/romanized examples to training.
+- LoRA fine-tuning of a multilingual LLM; weighted ensemble tuned on validation data.
+
 
 ---
 
@@ -118,7 +164,7 @@ python src/baselines.py
 python src/train_transformer.py --model muril --train_langs en hi bn --save
 python src/ensemble.py --tags mbert_tt xlmr_tt muril_tt --name ensemble_tt
 python src/llm_fewshot.py
-python src/explain_lime.py --model_dir models/muril_tt
+python src/explain_lime.py --model_dir models/xlmr_tt
 python src/summarize_results.py
 ```
 
@@ -150,7 +196,7 @@ src/
   models.py              [CLS] / mean-pooling classifiers (mean pooling used for MuRIL)
   error_analysis.py      errors by language, dataset and class
 data/processed/          english.csv, hindi.csv, bengali.csv
-data/challenge/          65 hand-written Hindi/Bengali comments (Milestone 1 challenge set)
+data/challenge/          64 hand-written Hindi/Bengali comments (Milestone 1 challenge set)
 results/                 metrics (JSON), predictions, figures, results_table.md, LIME output
 docs/                    progress report generator, Milestone 1 documents
 stance/, scripts/, reports/, runs/   Milestone 1 exploration pipeline

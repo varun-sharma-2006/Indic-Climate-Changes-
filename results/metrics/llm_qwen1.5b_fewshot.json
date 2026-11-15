@@ -1,0 +1,96 @@
+{
+  "experiment": "llm_qwen1.5b_fewshot",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "train_langs": [
+    "prompt only"
+  ],
+  "n_test_per_lang": "all",
+  "prompt": "Claim: \"Climate change and global warming is a serious concern.\"\nDecide the stance of the text towards the claim.\nFavour = agrees that climate change / global warming is real, harmful or needs action.\nAgainst = denies, mocks or downplays climate change or the need to act on it.\nNone = neutral, unrelated, or no clear stance.\nAnswer with exactly one word: Favour, Against or None.",
+  "shots": "1 example per label from the same language",
+  "results": {
+    "en": {
+      "macro_f1": 0.5096,
+      "accuracy": 0.5676,
+      "macro_precision": 0.5654,
+      "macro_recall": 0.5136,
+      "per_class_f1": {
+        "Favour": 0.6962,
+        "Against": 0.4538,
+        "None": 0.3788
+      },
+      "confusion_matrix": [
+        [
+          220,
+          12,
+          129
+        ],
+        [
+          5,
+          27,
+          42
+        ],
+        [
+          46,
+          6,
+          68
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.4236,
+      "accuracy": 0.5387,
+      "macro_precision": 0.466,
+      "macro_recall": 0.4168,
+      "per_class_f1": {
+        "Favour": 0.6819,
+        "Against": 0.2909,
+        "None": 0.298
+      },
+      "confusion_matrix": [
+        [
+          238,
+          11,
+          112
+        ],
+        [
+          33,
+          16,
+          25
+        ],
+        [
+          66,
+          9,
+          45
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.3844,
+      "accuracy": 0.5333,
+      "macro_precision": 0.4124,
+      "macro_recall": 0.3754,
+      "per_class_f1": {
+        "Favour": 0.6949,
+        "Against": 0.2478,
+        "None": 0.2105
+      },
+      "confusion_matrix": [
+        [
+          254,
+          15,
+          92
+        ],
+        [
+          34,
+          14,
+          26
+        ],
+        [
+          82,
+          10,
+          28
+        ]
+      ]
+    }
+  }
+}

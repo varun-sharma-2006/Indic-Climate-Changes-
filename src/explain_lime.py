@@ -24,7 +24,8 @@ def main():
     out_dir = RESULTS_DIR / "lime"
     out_dir.mkdir(exist_ok=True)
     predictor = StancePredictor(args.model_dir)
-    explainer = LimeTextExplainer(class_names=LABELS, random_state=SEED)
+    # split on spaces: the default splitter breaks Hindi/Bengali words at vowel signs (matras)
+    explainer = LimeTextExplainer(class_names=LABELS, split_expression=r"\s+", random_state=SEED)
     summary = ["# LIME explanations\n"]
 
     for lang in ["hi", "bn"]:
