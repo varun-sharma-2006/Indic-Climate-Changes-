@@ -194,6 +194,14 @@ def main():
 
     for lead, text in ANALYSIS(m, f1):
         bullet(doc, text, lead)
+    rom = ROOT / "results" / "metrics_extra" / "muril_tt_hr_br.json"
+    if rom.exists() and (METRICS_DIR / "muril_tt_rom.json").exists():
+        before = json.loads(rom.read_text(encoding="utf8"))["results"]
+        after = load("muril_tt_rom")["results"]
+        bullet(doc, f"MuRIL scores {before['hr']['macro_f1']:.2f} / {before['br']['macro_f1']:.2f} on romanised Hindi/Bengali "
+                    "(XLM-R collapses to ~0.2). Two more epochs with romanised copies of the training data raise this to "
+                    f"{after['hr']['macro_f1']:.2f} / {after['br']['macro_f1']:.2f}, at a small cost on native script "
+                    f"({after['hi']['macro_f1']:.3f} / {after['bn']['macro_f1']:.3f}).", "Romanised text (augmentation): ")
     ch_path = ROOT / "results" / "challenge_set_metrics.json"
     if ch_path.exists():
         ch = json.loads(ch_path.read_text(encoding="utf8"))
@@ -204,7 +212,7 @@ def main():
 
     fig = ROOT / "results" / "figures" / "model_comparison.png"
     if fig.exists():
-        doc.add_picture(str(fig), width=Cm(12.5))
+        doc.add_picture(str(fig), width=Cm(9.5))
         doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     # 4. challenges

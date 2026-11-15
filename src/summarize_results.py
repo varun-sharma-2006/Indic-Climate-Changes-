@@ -24,6 +24,8 @@ def main():
             setting = "Ensemble"
         elif langs == ["prompt only"]:
             setting = "Few-shot prompt (no training)"
+        elif "hr" in langs:
+            setting = "Translate-train + romanised (En+Hi+Bn+HiRom+BnRom)"
         else:
             setting = SETTING_NAMES["en" if langs == ["en"] else "tt"]
         row = {"experiment": m["experiment"], "model": m["model"], "training data": setting}

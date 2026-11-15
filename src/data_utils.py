@@ -12,7 +12,13 @@ from sklearn.metrics import accuracy_score, confusion_matrix, precision_recall_f
 from config import FIG_DIR, LABEL2ID, LABELS, METRICS_DIR, PROCESSED_DIR
 from preprocess import clean_text
 
-FILES = {"en": "english.csv", "hi": "hindi.csv", "bn": "bengali.csv"}
+FILES = {"en": "english.csv", "hi": "hindi.csv", "bn": "bengali.csv",
+         "hr": "hindi_roman.csv", "br": "bengali_roman.csv"}
+
+
+def available_test_langs():
+    """en, hi, bn plus the romanised sets if they have been generated."""
+    return [l for l in FILES if (PROCESSED_DIR / FILES[l]).exists()]
 
 
 def load_lang(lang: str) -> pd.DataFrame:

@@ -1,0 +1,66 @@
+{
+  "model_dir": "models/muril_tt",
+  "labels": [
+    "Favour",
+    "Against",
+    "None"
+  ],
+  "results": {
+    "hr": {
+      "macro_f1": 0.5207,
+      "accuracy": 0.609,
+      "macro_precision": 0.522,
+      "macro_recall": 0.5423,
+      "per_class_f1": {
+        "Favour": 0.7343,
+        "Against": 0.3649,
+        "None": 0.463
+      },
+      "confusion_matrix": [
+        [
+          239,
+          30,
+          92
+        ],
+        [
+          20,
+          27,
+          27
+        ],
+        [
+          31,
+          17,
+          72
+        ]
+      ]
+    },
+    "br": {
+      "macro_f1": 0.4866,
+      "accuracy": 0.582,
+      "macro_precision": 0.4842,
+      "macro_recall": 0.5046,
+      "per_class_f1": {
+        "Favour": 0.7143,
+        "Against": 0.3185,
+        "None": 0.4271
+      },
+      "confusion_matrix": [
+        [
+          235,
+          43,
+          83
+        ],
+        [
+          20,
+          25,
+          29
+        ],
+        [
+          42,
+          15,
+          63
+        ]
+      ]
+    }
+  }
+}

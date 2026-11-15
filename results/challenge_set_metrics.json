@@ -55,25 +55,53 @@
       ]
     ]
   },
-  "ensemble": {
-    "macro_f1": 0.6576,
-    "accuracy": 0.6719,
-    "macro_precision": 0.6859,
-    "macro_recall": 0.691,
+  "muril_tt_rom": {
+    "macro_f1": 0.6303,
+    "accuracy": 0.6562,
+    "macro_precision": 0.6614,
+    "macro_recall": 0.6692,
     "per_class_f1": {
-      "Favour": 0.7273,
-      "Against": 0.5625,
+      "Favour": 0.7241,
+      "Against": 0.4667,
+      "None": 0.7
+    },
+    "confusion_matrix": [
+      [
+        21,
+        3,
+        5
+      ],
+      [
+        7,
+        7,
+        6
+      ],
+      [
+        1,
+        0,
+        14
+      ]
+    ]
+  },
+  "ensemble": {
+    "macro_f1": 0.651,
+    "accuracy": 0.6719,
+    "macro_precision": 0.6962,
+    "macro_recall": 0.6858,
+    "per_class_f1": {
+      "Favour": 0.7368,
+      "Against": 0.5333,
       "None": 0.6829
     },
     "confusion_matrix": [
       [
-        20,
-        3,
+        21,
+        2,
         6
       ],
       [
-        5,
-        9,
+        6,
+        8,
         6
       ],
       [

@@ -1,0 +1,66 @@
+{
+  "model_dir": "models/xlmr_tt",
+  "labels": [
+    "Favour",
+    "Against",
+    "None"
+  ],
+  "results": {
+    "hr": {
+      "macro_f1": 0.2363,
+      "accuracy": 0.2919,
+      "macro_precision": 0.451,
+      "macro_recall": 0.3641,
+      "per_class_f1": {
+        "Favour": 0.2389,
+        "Against": 0.1136,
+        "None": 0.3563
+      },
+      "confusion_matrix": [
+        [
+          51,
+          7,
+          303
+        ],
+        [
+          3,
+          5,
+          66
+        ],
+        [
+          12,
+          2,
+          106
+        ]
+      ]
+    },
+    "br": {
+      "macro_f1": 0.1435,
+      "accuracy": 0.236,
+      "macro_precision": 0.3184,
+      "macro_recall": 0.3379,
+      "per_class_f1": {
+        "Favour": 0.0737,
+        "Against": 0.0,
+        "None": 0.3567
+      },
+      "confusion_matrix": [
+        [
+          14,
+          0,
+          347
+        ],
+        [
+          2,
+          0,
+          72
+        ],
+        [
+          3,
+          0,
+          117
+        ]
+      ]
+    }
+  }
+}

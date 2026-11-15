@@ -30,10 +30,10 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, get_linear_schedule_with_warmup
 
 from config import LABELS, MODEL_NAMES, MODELS_DIR, PREDS_DIR, set_seed
-from data_utils import compute_metrics, load_split, save_results
-from models import build_model
+from data_utils import available_test_langs, compute_metrics, load_split, save_results
+from models import build_model, load_trained
 
-TEST_LANGS = ["en", "hi", "bn"]
+TEST_LANGS = available_test_langs()
 
 
 def batches(df, tok, max_len, bs, shuffle):
@@ -76,6 +76,8 @@ def main():
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--pooling", choices=["cls", "mean"], default=None,
                     help="default: mean for MuRIL, cls for the others")
+    ap.add_argument("--init_dir", default=None,
+                    help="continue training from a saved model (e.g. models/muril_tt)")
     ap.add_argument("--save", action="store_true", help="save the best model (needed for predict.py / LIME)")
     ap.add_argument("--tag", default=None)
     args = ap.parse_args()
@@ -92,8 +94,12 @@ def main():
     val = load_split(args.train_langs, "val")
     tests = {l: load_split([l], "test") for l in TEST_LANGS}
 
-    tok = AutoTokenizer.from_pretrained(hf_name)
-    model = build_model(hf_name, pooling).to(device)
+    if args.init_dir:  # continued fine-tuning of one of our saved models
+        tok = AutoTokenizer.from_pretrained(args.init_dir)
+        model = load_trained(args.init_dir).to(device)
+    else:
+        tok = AutoTokenizer.from_pretrained(hf_name)
+        model = build_model(hf_name, pooling).to(device)
     freeze_embeddings(model)
 
     counts = np.bincount(train["y"], minlength=len(LABELS))
@@ -144,7 +150,7 @@ def main():
             .to_csv(PREDS_DIR / f"{tag}_{lang}.csv", index=False)
 
     save_results(tag, results, {
-        "model": hf_name, "pooling": pooling, "train_langs": args.train_langs, "n_train": len(train),
+        "model": hf_name, "pooling": pooling, "init_dir": args.init_dir, "train_langs": args.train_langs, "n_train": len(train),
         "epochs": args.epochs, "lr": args.lr, "batch_size": args.batch_size, "max_len": args.max_len,
         "best_val_macro_f1": best_f1, "history": history, "train_minutes": round((time.time() - start) / 60, 1),
     })

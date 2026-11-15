@@ -1,0 +1,183 @@
+{
+  "experiment": "muril_rom",
+  "model": "google/muril-base-cased",
+  "pooling": "mean",
+  "train_langs": [
+    "en",
+    "hi",
+    "bn",
+    "hr",
+    "br"
+  ],
+  "n_train": 22680,
+  "epochs": 4,
+  "lr": 3e-05,
+  "batch_size": 16,
+  "max_len": 128,
+  "best_val_macro_f1": 0.5054,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.0877,
+      "val_macro_f1": 0.3821
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.0646,
+      "val_macro_f1": 0.4235
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.0423,
+      "val_macro_f1": 0.4354
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.0163,
+      "val_macro_f1": 0.5054
+    }
+  ],
+  "train_minutes": 23.2,
+  "results": {
+    "en": {
+      "macro_f1": 0.548,
+      "accuracy": 0.6901,
+      "macro_precision": 0.5674,
+      "macro_recall": 0.538,
+      "per_class_f1": {
+        "Favour": 0.8144,
+        "Against": 0.3007,
+        "None": 0.5288
+      },
+      "confusion_matrix": [
+        [
+          305,
+          36,
+          20
+        ],
+        [
+          38,
+          23,
+          13
+        ],
+        [
+          45,
+          20,
+          55
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.5525,
+      "accuracy": 0.6811,
+      "macro_precision": 0.5742,
+      "macro_recall": 0.5473,
+      "per_class_f1": {
+        "Favour": 0.8016,
+        "Against": 0.3659,
+        "None": 0.49
+      },
+      "confusion_matrix": [
+        [
+          299,
+          38,
+          24
+        ],
+        [
+          37,
+          30,
+          7
+        ],
+        [
+          49,
+          22,
+          49
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.5236,
+      "accuracy": 0.6559,
+      "macro_precision": 0.5526,
+      "macro_recall": 0.5216,
+      "per_class_f1": {
+        "Favour": 0.7865,
+        "Against": 0.3258,
+        "None": 0.4583
+      },
+      "confusion_matrix": [
+        [
+          291,
+          49,
+          21
+        ],
+        [
+          38,
+          29,
+          7
+        ],
+        [
+          50,
+          26,
+          44
+        ]
+      ]
+    },
+    "hr": {
+      "macro_f1": 0.564,
+      "accuracy": 0.6811,
+      "macro_precision": 0.5685,
+      "macro_recall": 0.5606,
+      "per_class_f1": {
+        "Favour": 0.7923,
+        "Against": 0.3733,
+        "None": 0.5263
+      },
+      "confusion_matrix": [
+        [
+          290,
+          35,
+          36
+        ],
+        [
+          34,
+          28,
+          12
+        ],
+        [
+          47,
+          13,
+          60
+        ]
+      ]
+    },
+    "br": {
+      "macro_f1": 0.5667,
+      "accuracy": 0.6919,
+      "macro_precision": 0.5787,
+      "macro_recall": 0.5587,
+      "per_class_f1": {
+        "Favour": 0.8054,
+        "Against": 0.381,
+        "None": 0.5138
+      },
+      "confusion_matrix": [
+        [
+          300,
+          31,
+          30
+        ],
+        [
+          34,
+          28,
+          12
+        ],
+        [
+          50,
+          14,
+          56
+        ]
+      ]
+    }
+  }
+}

@@ -7,6 +7,7 @@ Each text is classified as **Favour**, **Against** or **None**. Main metric: **M
 **Team:** Varun Sharma (S24CSEU0170), Yashika Garg (S24CSEU0235), Priyanshu Raj (S24CSEU1142), Advay Sinha (S24CSEU2059)
 **Guide:** Dr. Supriya Chanda, SCSET, Bennett University
 Individual responsibilities: [CONTRIBUTIONS.md](CONTRIBUTIONS.md)
+**Full explanation of the project (for every team member):** [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md)
 
 > **Repository layout:** `src/` is the **Round 2 implementation** described in this README.
 > The `stance/` package, `docs/01–06`, `reports/eda/` and `data/challenge/` come from our Milestone 1 exploration.
@@ -121,6 +122,17 @@ Macro F1 and accuracy on the test sets (555 examples per language). All numbers 
 5. **Ensembles** help Hindi (best Hindi F1 0.675) but not Bengali, so MuRIL alone is our final model for now.
 6. **A small LLM without training** (Qwen2.5-1.5B, few-shot) is much weaker (F1 0.42 / 0.38). Fine-tuning still matters.
 
+**Romanised Hindi/Bengali** (the same test sets written in Latin letters, e.g. "global varmimg eka gambhir samasya hai"):
+
+| Model | F1 Hi | F1 Bn | F1 Hi-romanised | F1 Bn-romanised |
+|---|---|---|---|---|
+| XLM-R translate-train | 0.641 | 0.619 | 0.236 | 0.143 |
+| MuRIL translate-train | 0.662 | 0.650 | 0.521 | 0.487 |
+| MuRIL trained from scratch with romanised copies (4 epochs) | 0.552 | 0.524 | 0.564 | 0.567 |
+| **MuRIL translate-train + 2 more epochs with romanised copies** | 0.655 | 0.634 | **0.623** | **0.563** |
+
+XLM-R almost fails on romanised text, while MuRIL (pre-trained with transliterated text) keeps working. Continued training with romanised copies adds **+0.10 / +0.08** F1 on romanised text for a small loss on native script. Training from scratch on all five versions underfitted in 4 epochs (loss still 1.02), so continuing from the trained model was the better choice. On the 64 hand-written comments the romanised model gets 10/15 romanised comments right (vs 9/15) but 2 fewer native-script ones, so **`muril_tt` stays our main model** and `muril_tt_rom` is the option for mostly-romanised input.
+
 **Hand-written challenge set** (64 Hindi/Bengali comments in YouTube style, not translations): XLM-R macro F1 **0.68**, MuRIL **0.66**. Explicit statements are 100% correct; **sarcasm (38%)** and **romanized Hindi/Bengali (20%)** are the weak points ([results/challenge_set_results.md](results/challenge_set_results.md)).
 
 **Error analysis** ([results/error_analysis_muril_tt.md](results/error_analysis_muril_tt.md)): 55% of errors are Favour ↔ None. ClimateStance's "ambiguous" class (which includes sarcastic tweets) maps poorly to our None (F1 < 0.15), while GWSD's neutral class reaches ~0.70–0.74.
@@ -183,6 +195,9 @@ src/
   download_data.py       GWSD + ClimateStance → data/processed/english.csv
   translate.py           Hindi / Bengali translations (NLLB-200)
   preprocess.py          text cleaning
+  romanize_data.py       romanised Hindi/Bengali copies (augmentation)
+  evaluate_saved.py      score a saved model on any test set (e.g. romanised)
+  eval_challenge.py      score models on the hand-written challenge set
   data_utils.py          loading data, metrics, confusion-matrix plots
   data_stats.py          dataset statistics and plots
   baselines.py           TF-IDF + LR / SVM

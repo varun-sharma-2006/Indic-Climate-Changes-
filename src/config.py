@@ -23,6 +23,7 @@ LABEL2ID = {l: i for i, l in enumerate(LABELS)}
 ID2LABEL = {i: l for l, i in LABEL2ID.items()}
 
 LANGS = {"en": "English", "hi": "Hindi", "bn": "Bengali"}
+ROMAN_LANGS = {"hr": "Hindi (romanised)", "br": "Bengali (romanised)"}  # made by src/romanize_data.py
 
 CLAIM = "Climate change and global warming is a serious concern."
 
