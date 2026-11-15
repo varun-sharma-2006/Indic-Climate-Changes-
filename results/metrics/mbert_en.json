@@ -1,0 +1,123 @@
+{
+  "experiment": "mbert_en",
+  "model": "bert-base-multilingual-cased",
+  "pooling": "cls",
+  "train_langs": [
+    "en"
+  ],
+  "n_train": 4536,
+  "epochs": 4,
+  "lr": 3e-05,
+  "batch_size": 16,
+  "max_len": 128,
+  "best_val_macro_f1": 0.6438,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.9906,
+      "val_macro_f1": 0.445
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.7864,
+      "val_macro_f1": 0.5784
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.5434,
+      "val_macro_f1": 0.6438
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.3321,
+      "val_macro_f1": 0.6303
+    }
+  ],
+  "train_minutes": 3.8,
+  "results": {
+    "en": {
+      "macro_f1": 0.6538,
+      "accuracy": 0.7099,
+      "macro_precision": 0.6351,
+      "macro_recall": 0.6892,
+      "per_class_f1": {
+        "Favour": 0.8,
+        "Against": 0.6036,
+        "None": 0.558
+      },
+      "confusion_matrix": [
+        [
+          266,
+          27,
+          68
+        ],
+        [
+          12,
+          51,
+          11
+        ],
+        [
+          26,
+          17,
+          77
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.4197,
+      "accuracy": 0.4613,
+      "macro_precision": 0.4977,
+      "macro_recall": 0.4823,
+      "per_class_f1": {
+        "Favour": 0.541,
+        "Against": 0.303,
+        "None": 0.415
+      },
+      "confusion_matrix": [
+        [
+          142,
+          29,
+          190
+        ],
+        [
+          5,
+          20,
+          49
+        ],
+        [
+          17,
+          9,
+          94
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.3462,
+      "accuracy": 0.3586,
+      "macro_precision": 0.455,
+      "macro_recall": 0.453,
+      "per_class_f1": {
+        "Favour": 0.3436,
+        "Against": 0.3023,
+        "None": 0.3926
+      },
+      "confusion_matrix": [
+        [
+          78,
+          59,
+          224
+        ],
+        [
+          3,
+          26,
+          45
+        ],
+        [
+          12,
+          13,
+          95
+        ]
+      ]
+    }
+  }
+}

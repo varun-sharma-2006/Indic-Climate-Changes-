@@ -1,0 +1,96 @@
+{
+  "experiment": "tfidf_lr_tt",
+  "model": "TF-IDF + LR",
+  "train_langs": [
+    "en",
+    "hi",
+    "bn"
+  ],
+  "n_train": 13608,
+  "results": {
+    "en": {
+      "macro_f1": 0.6142,
+      "accuracy": 0.7027,
+      "macro_precision": 0.6143,
+      "macro_recall": 0.6145,
+      "per_class_f1": {
+        "Favour": 0.8017,
+        "Against": 0.543,
+        "None": 0.4979
+      },
+      "confusion_matrix": [
+        [
+          291,
+          24,
+          46
+        ],
+        [
+          24,
+          41,
+          9
+        ],
+        [
+          50,
+          12,
+          58
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.5919,
+      "accuracy": 0.6919,
+      "macro_precision": 0.5912,
+      "macro_recall": 0.5928,
+      "per_class_f1": {
+        "Favour": 0.8067,
+        "Against": 0.5,
+        "None": 0.4691
+      },
+      "confusion_matrix": [
+        [
+          290,
+          18,
+          53
+        ],
+        [
+          24,
+          37,
+          13
+        ],
+        [
+          44,
+          19,
+          57
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.5829,
+      "accuracy": 0.6937,
+      "macro_precision": 0.5898,
+      "macro_recall": 0.5778,
+      "per_class_f1": {
+        "Favour": 0.8077,
+        "Against": 0.4493,
+        "None": 0.4918
+      },
+      "confusion_matrix": [
+        [
+          294,
+          20,
+          47
+        ],
+        [
+          26,
+          31,
+          17
+        ],
+        [
+          47,
+          13,
+          60
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "experiment": "tfidf_lr_en",
+  "model": "TF-IDF + LR",
+  "train_langs": [
+    "en"
+  ],
+  "n_train": 4536,
+  "results": {
+    "en": {
+      "macro_f1": 0.6203,
+      "accuracy": 0.7117,
+      "macro_precision": 0.6219,
+      "macro_recall": 0.6192,
+      "per_class_f1": {
+        "Favour": 0.8104,
+        "Against": 0.5333,
+        "None": 0.5172
+      },
+      "confusion_matrix": [
+        [
+          295,
+          23,
+          43
+        ],
+        [
+          25,
+          40,
+          9
+        ],
+        [
+          47,
+          13,
+          60
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.1709,
+      "accuracy": 0.2577,
+      "macro_precision": 0.715,
+      "macro_recall": 0.3563,
+      "per_class_f1": {
+        "Favour": 0.1192,
+        "Against": 0.0267,
+        "None": 0.3667
+      },
+      "confusion_matrix": [
+        [
+          23,
+          0,
+          338
+        ],
+        [
+          1,
+          1,
+          72
+        ],
+        [
+          1,
+          0,
+          119
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.1551,
+      "accuracy": 0.2432,
+      "macro_precision": 0.7187,
+      "macro_recall": 0.3508,
+      "per_class_f1": {
+        "Favour": 0.0745,
+        "Against": 0.0267,
+        "None": 0.3642
+      },
+      "confusion_matrix": [
+        [
+          14,
+          0,
+          347
+        ],
+        [
+          1,
+          1,
+          72
+        ],
+        [
+          0,
+          0,
+          120
+        ]
+      ]
+    }
+  }
+}

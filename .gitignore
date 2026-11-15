@@ -1,0 +1,44 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+.hf_cache/
+node_modules/
+~$*
+
+# trained models and large artefacts (regenerate with the scripts)
+models/
+runs/*/best/
+runs/*/best_adapter/
+runs/*/model.pkl
+*.safetensors
+*.bin
+*.zip
+
+# raw downloads (re-downloaded by src/download_data.py / stance.download_external)
+data/raw/
+data/external/raw/
+data/external/processed/*.csv
+data/translated/*.csv
+data/augmented/
+
+# processed data: keep only the Round 2 files (translations take ~20 min to regenerate)
+data/processed/*
+!data/processed/english.csv
+!data/processed/hindi.csv
+!data/processed/bengali.csv
+
+# official data may not be redistributable - keep out of the public repo unless organisers allow
+data/official/*
+!data/official/README.md
+submissions/
+
+# collected YouTube comments (personal data) stay local
+data/youtube/*.csv
+
+# training logs (progress bars) and LIME html
+results/logs/
+results/lime/*.html
+reports/eda/*/features.csv
+runs/*/pred_valid.csv

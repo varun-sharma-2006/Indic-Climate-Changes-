@@ -1,0 +1,125 @@
+{
+  "experiment": "xlmr_tt",
+  "model": "xlm-roberta-base",
+  "pooling": "cls",
+  "train_langs": [
+    "en",
+    "hi",
+    "bn"
+  ],
+  "n_train": 13608,
+  "epochs": 4,
+  "lr": 3e-05,
+  "batch_size": 16,
+  "max_len": 128,
+  "best_val_macro_f1": 0.6466,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.0066,
+      "val_macro_f1": 0.5826
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.7912,
+      "val_macro_f1": 0.6194
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.5701,
+      "val_macro_f1": 0.5999
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.3867,
+      "val_macro_f1": 0.6466
+    }
+  ],
+  "train_minutes": 12.3,
+  "results": {
+    "en": {
+      "macro_f1": 0.673,
+      "accuracy": 0.7387,
+      "macro_precision": 0.6591,
+      "macro_recall": 0.6912,
+      "per_class_f1": {
+        "Favour": 0.8264,
+        "Against": 0.6211,
+        "None": 0.5714
+      },
+      "confusion_matrix": [
+        [
+          288,
+          23,
+          50
+        ],
+        [
+          14,
+          50,
+          10
+        ],
+        [
+          34,
+          14,
+          72
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.6409,
+      "accuracy": 0.7207,
+      "macro_precision": 0.6294,
+      "macro_recall": 0.6566,
+      "per_class_f1": {
+        "Favour": 0.8188,
+        "Against": 0.5488,
+        "None": 0.5551
+      },
+      "confusion_matrix": [
+        [
+          287,
+          26,
+          48
+        ],
+        [
+          20,
+          45,
+          9
+        ],
+        [
+          33,
+          19,
+          68
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.6187,
+      "accuracy": 0.6973,
+      "macro_precision": 0.6088,
+      "macro_recall": 0.6324,
+      "per_class_f1": {
+        "Favour": 0.7914,
+        "Against": 0.5032,
+        "None": 0.5615
+      },
+      "confusion_matrix": [
+        [
+          275,
+          28,
+          58
+        ],
+        [
+          26,
+          39,
+          9
+        ],
+        [
+          33,
+          14,
+          73
+        ]
+      ]
+    }
+  }
+}

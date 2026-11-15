@@ -1,0 +1,94 @@
+{
+  "experiment": "tfidf_svm_en",
+  "model": "TF-IDF + SVM",
+  "train_langs": [
+    "en"
+  ],
+  "n_train": 4536,
+  "results": {
+    "en": {
+      "macro_f1": 0.5955,
+      "accuracy": 0.7099,
+      "macro_precision": 0.616,
+      "macro_recall": 0.582,
+      "per_class_f1": {
+        "Favour": 0.8148,
+        "Against": 0.4857,
+        "None": 0.486
+      },
+      "confusion_matrix": [
+        [
+          308,
+          19,
+          34
+        ],
+        [
+          32,
+          34,
+          8
+        ],
+        [
+          55,
+          13,
+          52
+        ]
+      ]
+    },
+    "hi": {
+      "macro_f1": 0.1754,
+      "accuracy": 0.2613,
+      "macro_precision": 0.6973,
+      "macro_recall": 0.3563,
+      "per_class_f1": {
+        "Favour": 0.133,
+        "Against": 0.0267,
+        "None": 0.3665
+      },
+      "confusion_matrix": [
+        [
+          26,
+          0,
+          335
+        ],
+        [
+          2,
+          1,
+          71
+        ],
+        [
+          2,
+          0,
+          118
+        ]
+      ]
+    },
+    "bn": {
+      "macro_f1": 0.158,
+      "accuracy": 0.245,
+      "macro_precision": 0.7036,
+      "macro_recall": 0.3498,
+      "per_class_f1": {
+        "Favour": 0.0844,
+        "Against": 0.0267,
+        "None": 0.3628
+      },
+      "confusion_matrix": [
+        [
+          16,
+          0,
+          345
+        ],
+        [
+          1,
+          1,
+          72
+        ],
+        [
+          1,
+          0,
+          119
+        ]
+      ]
+    }
+  }
+}
