@@ -245,6 +245,8 @@ All numbers: `results/results_table.md`, `results/metrics/*.json`, chart `result
 13. **What is LIME?** It removes words at random, watches how the prediction changes, and fits a simple model to estimate each word's importance.
 14. **What are your main weaknesses?** Sarcasm, romanised text, and the Favour/None boundary.
 15. **What will you do before the final evaluation?** See section 11.
+16. **Why is "मैं खुश नहीं हूँ" ("I am not happy") predicted as None?** Because it is **correct**. It expresses a feeling but says nothing about climate change, so it takes no stance on the claim. Stance ≠ sentiment. "मैं जलवायु परिवर्तन से खुश नहीं हूँ, ये बहुत खतरनाक है" ("I am not happy about climate change, it is very dangerous") is predicted **Favour**.
+17. **Does it work on sentences we type ourselves?** `python src/sanity_check.py` tests 18 hand-written sentences (negation, "I don't think…", off-topic, Bengali, romanised, sarcasm). MuRIL gets **16/18**; the two mistakes are both sarcasm, our known weakness.
 
 ---
 

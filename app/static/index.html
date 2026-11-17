@@ -322,6 +322,13 @@ function render(d) {
   vt.appendChild(el("div", { style: "font-size:18px;font-weight:600" }, `${conf}% confident`));
   vt.appendChild(el("div", { class: "muted" }, `${d.model_desc} · ${d.ms} ms`));
   v.appendChild(vt);
+  const MEANING = {
+    Favour: "The comment agrees that climate change / global warming is a serious concern.",
+    Against: "The comment denies, mocks or downplays climate change as a serious concern.",
+    None: "The comment does not take a side on climate change: it is unrelated, neutral or unclear. " +
+          "Stance is not sentiment: “I am not happy” is negative, but says nothing about climate change.",
+  };
+  v.appendChild(el("div", { style: "flex-basis:100%;font-size:15px", class: d.label }, "Meaning: " + MEANING[d.label]));
 
   $("raw").textContent = d.input;
 

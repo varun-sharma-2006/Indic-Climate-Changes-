@@ -133,6 +133,8 @@ Macro F1 and accuracy on the test sets (555 examples per language). All numbers 
 
 XLM-R almost fails on romanised text, while MuRIL (pre-trained with transliterated text) keeps working. Continued training with romanised copies adds **+0.10 / +0.08** F1 on romanised text for a small loss on native script. Training from scratch on all five versions underfitted in 4 epochs (loss still 1.02), so continuing from the trained model was the better choice. On the 64 hand-written comments the romanised model gets 10/15 romanised comments right (vs 9/15) but 2 fewer native-script ones, so **`muril_tt` stays our main model** and `muril_tt_rom` is the option for mostly-romanised input.
 
+**Sanity check** (`python src/sanity_check.py`, 18 sentences an evaluator might type: negation, "I don't think…", sentiment without stance, off-topic, Bengali, romanised, sarcasm): MuRIL **16/18** correct; both mistakes are sarcasm.
+
 **Hand-written challenge set** (64 Hindi/Bengali comments in YouTube style, not translations): XLM-R macro F1 **0.68**, MuRIL **0.66**. Explicit statements are 100% correct; **sarcasm (38%)** and **romanized Hindi/Bengali (20%)** are the weak points ([results/challenge_set_results.md](results/challenge_set_results.md)).
 
 **Error analysis** ([results/error_analysis_muril_tt.md](results/error_analysis_muril_tt.md)): 55% of errors are Favour ↔ None. ClimateStance's "ambiguous" class (which includes sarcastic tweets) maps poorly to our None (F1 < 0.15), while GWSD's neutral class reaches ~0.70–0.74.
