@@ -1,5 +1,7 @@
 # Team Contributions
 
+We discussed and worked on every part of the project together. Each member took **primary responsibility** for one area: they implemented it, maintain it and explain it in depth, while helping on the others.
+
 | Member | Enrolment No. | Responsibility | Files owned |
 |---|---|---|---|
 | Varun Sharma | S24CSEU0170 | Data collection, label mapping, translation, YouTube comment collection and labelling | `src/download_data.py`, `src/translate.py`, `src/collect_youtube.py`, `src/data_stats.py`, `src/romanize_data.py` |
