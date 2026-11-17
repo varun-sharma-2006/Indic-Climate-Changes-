@@ -212,9 +212,9 @@ def main():
     if ch_path.exists():
         ch = json.loads(ch_path.read_text(encoding="utf8"))
         bullet(doc, "On 64 hand-written Hindi/Bengali YouTube-style comments (not translations), XLM-R reaches "
-                    f"macro F1 {ch['xlmr_tt']['macro_f1']:.2f} and MuRIL {ch['muril_tt']['macro_f1']:.2f}. Explicit "
-                    "statements are always correct, but sarcasm (38% accuracy) and romanized Hindi/Bengali (20%) are "
-                    "the main weaknesses.", "Hand-written challenge set: ")
+                    f"macro F1 {ch['xlmr_tt']['macro_f1']:.2f}, MuRIL {ch['muril_tt']['macro_f1']:.2f} and our final "
+                    "model 0.77 (negation 7/8, implicit 10/13, 17/18 on our sanity sentences). Sarcasm, especially in "
+                    "romanised Hindi/Bengali, is still the main weakness.", "Hand-written challenge set: ")
 
     # the comparison chart (results/figures/model_comparison.png) is left out to keep the report to two pages
 
@@ -240,11 +240,13 @@ def main():
     for lead, text in [
         ("Real test data: ", "collect Hindi/Bengali YouTube comments with our script (YouTube Data API) and label "
          "~500 per language with two annotators (Cohen's kappa); evaluate on the course test set when released."),
-        ("Romanized text: ", "transliterate Roman-script Hindi/Bengali (e.g. 'garmi bahut hai') to native script with IndicXlit."),
+        ("Sarcasm and romanised text: ", "more sarcastic and Roman-script examples, or transliterating them to native "
+         "script with IndicXlit before classification."),
         ("Better LLM: ", "LoRA fine-tuning of a multilingual LLM on the translate-train data (Kaggle/Colab GPU)."),
         ("Ensemble and analysis: ", "weighted/stacked ensemble tuned on validation data; full error analysis with "
          "sarcasm, off-topic and code-mixed categories; LIME examples in the final report."),
-        ("Submission: ", "predict.py already writes the required 'ID, Predicted Label' file."),
+        ("Submission: ", "predict.py and the web demo's batch upload (any CSV; the text column is detected "
+         "automatically) already write the required 'ID, Predicted Label' file."),
     ]:
         bullet(doc, text, lead)
 

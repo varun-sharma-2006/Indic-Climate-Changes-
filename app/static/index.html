@@ -201,8 +201,9 @@
 <section class="tab" id="batch">
   <div class="card">
     <h2>Classify a whole file</h2>
-    <p class="muted">Upload a CSV with columns <code>ID</code> and <code>text</code>. You get back <code>ID, Predicted Label</code>,
-      the submission format for the course.</p>
+    <p class="muted">Upload a CSV of comments (up to 5,000 rows). The text column (<code>text</code>, <code>comment</code>, … or
+      the longest one) and the <code>ID</code> column are found automatically. You get back <code>ID, Predicted Label</code>,
+      the submission format for the course. Try <code>data/challenge/challenge_hi_bn.csv</code>.</p>
     <form id="batchform" class="row">
       <input type="file" name="file" accept=".csv" required>
       <select name="model" id="bmodel"></select>

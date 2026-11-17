@@ -252,6 +252,7 @@ All numbers: `results/results_table.md`, `results/metrics/*.json`, chart `result
 | Label "None" read as a missing value by pandas | Labels showed as NaN | `keep_default_na=False` when reading CSVs |
 | LIME split Hindi/Bengali words into single letters | Explanations showed "त", "प" | Split on spaces only |
 | Only 13% Against | Class counts | Class-weighted loss + Macro F1 |
+| Web demo batch upload said "Failed to fetch", and a CSV without a `text` column came back all None | Server log showed the upload never arrived (stale page/file in the browser); the server used the last column (vote counts) as text | Reload the page and pick the file again; the server now finds the text column itself (`text`, `comment`, `sentence`, `tweet`, `claim`, else the longest-text column) and the page explains the error |
 
 ---
 
@@ -270,12 +271,13 @@ All numbers: `results/results_table.md`, `results/metrics/*.json`, chart `result
 11. **What does the ensemble do?** It averages the predicted probabilities of several models. It helped Hindi but not Bengali, because mBERT is weaker.
 12. **Why did the LLM do badly?** It is a small 1.5B model, used without any training, only a prompt. Fine-tuned models learn the exact label definitions from thousands of examples.
 13. **What is LIME?** It removes words at random, watches how the prediction changes, and fits a simple model to estimate each word's importance.
-14. **What are your main weaknesses?** Sarcasm, romanised text, and the Favour/None boundary.
+14. **What are your main weaknesses?** Sarcasm (improved from 0/8 to 5/8, but still the main error, especially in romanised Hindi/Bengali) and the Favour/None boundary (55% of all errors).
 15. **What will you do before the final evaluation?** See section 11.
 16. **Why is "मैं खुश नहीं हूँ" ("I am not happy") predicted as None?** Because it is **correct**. It expresses a feeling but says nothing about climate change, so it takes no stance on the claim. Stance ≠ sentiment. "मैं जलवायु परिवर्तन से खुश नहीं हूँ, ये बहुत खतरनाक है" ("I am not happy about climate change, it is very dangerous") is predicted **Favour**.
+17. **Does it work on sentences we type ourselves?** `python src/sanity_check.py` tests 18 hand-written sentences (negation, "I don't think…", off-topic, Bengali, romanised, sarcasm). Our final model gets **17/18** (the earlier MuRIL model got 16/18); the one mistake is romanised sarcasm, our known weakness. Try any sentence live in the web demo.
 18. **Did you use AI-generated data?** Yes, and we disclose it: 184 short YouTube-style training comments were written with an AI assistant and checked by us. This is LLM-based data augmentation. They are used **only for training**; we removed any sentence similar to an evaluation sentence, and all reported improvements are measured on data never used for training (challenge set, held-out Kaggle/SemEval tweets).
 19. **Why is your final model slightly worse on the Hindi test set?** The test set is formal translated news/tweets. The robust model trades 0.03 F1 there for large gains on comment-style text (challenge set 0.66 → 0.77, held-out tweets 0.47 → 0.66), which matches our task (YouTube comments).
-17. **Does it work on sentences we type ourselves?** `python src/sanity_check.py` tests 18 hand-written sentences (negation, "I don't think…", off-topic, Bengali, romanised, sarcasm). MuRIL gets **16/18**; the two mistakes are both sarcasm, our known weakness.
+20. **How do you produce the submission file?** `python src/predict.py --input file.csv --output preds.csv`, or the web demo's *Batch file* tab. Both write `ID, Predicted Label`. The web demo finds the text and ID columns by itself, so any CSV of comments works.
 
 ---
 
@@ -289,7 +291,13 @@ All numbers: `results/results_table.md`, `results/metrics/*.json`, chart `result
 5. the probabilities
 6. word importance: each word is removed in turn to see how much the confidence drops
 
-Use the *Results* tab for the numbers and charts, and *Batch file* to classify a CSV. A link such as `http://127.0.0.1:5000/?q=<comment>` opens with that comment already analysed.
+Use the *Results* tab for the numbers and charts. A link such as `http://127.0.0.1:5000/?q=<comment>` opens with that comment already analysed. Keep the model menu on the default **MuRIL Robust 2 (final model)**; it handles native-script and romanised comments.
+
+**Batch file tab (classify a whole CSV):**
+- Upload any CSV of comments. The server finds the text column itself (`text`, `comment`, `sentence`, `tweet` or `claim`; otherwise the column with the longest text) and the ID column (`id`, any column ending in `id`, otherwise the row number). Maximum 5,000 rows.
+- You get back `predictions.csv` with `ID, Predicted Label`, the course submission format.
+- For the teacher, upload `data/challenge/challenge_hi_bn.csv` (64 Hindi/Bengali comments). Don't use English fact-check files such as Climate-FEVER; they are not comments and not part of our datasets.
+- If it says *could not reach the server*: check that the `start_demo.bat` window is still open, press F5 and choose the file again.
 
 Command-line alternative:
 

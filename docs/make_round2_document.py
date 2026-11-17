@@ -460,10 +460,12 @@ def part_d(doc):
     for s in ["**Live demo tab:** click an example (or type a comment) and press *Analyse*. The page shows the six steps: raw input → "
               "each cleaning step and what it changed → script detection → the sub-word tokens the model reads → probabilities "
               "for Favour / Against / None → word importance (each word removed in turn to see how much the confidence drops).",
-              "**Model menu:** switch to *MuRIL + romanised* for comments typed in English letters (the page suggests this automatically).",
+              "**Model menu:** keep the default *MuRIL Robust 2* (final model); it handles native-script and romanised comments.",
               "**How it works tab:** training pipeline, dataset statistics, base paper vs our project.",
               "**Results tab:** all experiments, charts and confusion matrices.",
-              "**Batch file tab:** upload a CSV with ID,text and download the submission file."]:
+              "**Batch file tab:** upload any CSV of comments (the text and ID columns are found automatically, up to 5,000 rows) "
+              "and download predictions.csv in the submission format ID, Predicted Label. Use data/challenge/challenge_hi_bn.csv "
+              "for the demo. If it says it could not reach the server, check the black window is open, press F5 and choose the file again."]:
         bullet(doc, s)
     doc.add_heading("Live demo commands (tested on 17 Nov 2026)", level=2)
     code_block(doc, [
