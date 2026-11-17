@@ -234,7 +234,7 @@ The test sets above are formal news sentences and 2019 tweets. To make the model
 3. **MuRIL > XLM-R > mBERT** after translate-train: pre-training on Indian languages helps.
 4. The ensemble gives the best **Hindi** score but is worse on Bengali, so MuRIL alone is our final model.
 5. A small LLM with only a prompt is much weaker than fine-tuned models.
-6. On the **hand-written challenge set**: XLM-R 0.68, MuRIL 0.66 macro F1. Explicit statements are always right; **sarcasm (38%)** and **romanised text (20%)** were the weak points (see 4.5 and the romanised results above).
+6. On the **hand-written challenge set**: XLM-R 0.68, MuRIL 0.66 and our final model **0.77** macro F1. Explicit statements are always right; **sarcasm** (0/8 → 5/8 with the final model) is still the main weak point, especially in romanised text (see 4.5 and the robustness table above).
 7. **Error analysis:** 55% of errors are Favour ↔ None. ClimateStance's "ambiguous" class (it includes sarcasm) fits our None poorly (F1 < 0.15), while GWSD's neutral class reaches 0.70–0.74.
 8. **LIME** shows sensible cues: ঝুঁকি/खतरा ("risk/danger") → Favour; না ("not") → Against; प्रतिशत ("percent", survey statistics) → None.
 

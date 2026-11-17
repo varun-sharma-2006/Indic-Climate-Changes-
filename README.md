@@ -153,7 +153,7 @@ The test sets above are formal news sentences and 2019 tweets. To make the model
 
 **Sanity check** (`python src/sanity_check.py`, 18 sentences an evaluator might type: negation, "I don't think…", sentiment without stance, off-topic, Bengali, romanised, sarcasm): MuRIL **16/18** correct; both mistakes are sarcasm.
 
-**Hand-written challenge set** (64 Hindi/Bengali comments in YouTube style, not translations): XLM-R macro F1 **0.68**, MuRIL **0.66**. Explicit statements are 100% correct; **sarcasm (38%)** and **romanized Hindi/Bengali (20%)** are the weak points ([results/challenge_set_results.md](results/challenge_set_results.md)).
+**Hand-written challenge set** (64 Hindi/Bengali comments in YouTube style, not translations): XLM-R macro F1 **0.68**, MuRIL **0.66**, final model (MuRIL Robust 2) **0.77**. Explicit statements are always correct; **sarcasm** (5/8 for the final model, 0/8 before) is still the main weak point, especially in romanized Hindi/Bengali ([results/challenge_set_results.md](results/challenge_set_results.md)).
 
 **Error analysis** ([results/error_analysis_muril_tt.md](results/error_analysis_muril_tt.md)): 55% of errors are Favour ↔ None. ClimateStance's "ambiguous" class (which includes sarcastic tweets) maps poorly to our None (F1 < 0.15), while GWSD's neutral class reaches ~0.70–0.74.
 
