@@ -29,9 +29,10 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AutoTokenizer, get_linear_schedule_with_warmup
 
-from config import LABELS, MODEL_NAMES, MODELS_DIR, PREDS_DIR, set_seed
+from config import LABEL2ID, LABELS, MODEL_NAMES, MODELS_DIR, PREDS_DIR, set_seed
 from data_utils import available_test_langs, compute_metrics, load_split, save_results
 from models import build_model, load_trained
+from preprocess import clean_text
 
 TEST_LANGS = available_test_langs()
 
@@ -76,6 +77,10 @@ def main():
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--pooling", choices=["cls", "mean"], default=None,
                     help="default: mean for MuRIL, cls for the others")
+    ap.add_argument("--extra_train", default=None,
+                    help="extra training CSV from src/extra_data.py (id, source, lang, split, text, label)")
+    ap.add_argument("--repeat_synthetic", type=int, default=3,
+                    help="how many times the small synthetic comment set is repeated in --extra_train")
     ap.add_argument("--init_dir", default=None,
                     help="continue training from a saved model (e.g. models/muril_tt)")
     ap.add_argument("--save", action="store_true", help="save the best model (needed for predict.py / LIME)")
@@ -91,6 +96,15 @@ def main():
     print(f"== {tag}: {hf_name} on {device}, train langs {args.train_langs}")
 
     train = load_split(args.train_langs, "train")
+    if args.extra_train:
+        extra = pd.read_csv(args.extra_train, keep_default_na=False)
+        extra = extra[extra["lang"].isin(args.train_langs)]
+        syn = extra[extra["source"] == "SyntheticYouTubeStyle"]
+        extra = pd.concat([extra] + [syn] * (args.repeat_synthetic - 1), ignore_index=True)
+        extra["clean"] = extra["text"].astype(str).map(clean_text)
+        extra["y"] = extra["label"].map(LABEL2ID)
+        print(f"extra training rows: {len(extra)} ({extra['source'].value_counts().to_dict()})")
+        train = pd.concat([train, extra[train.columns.intersection(extra.columns)]], ignore_index=True)
     val = load_split(args.train_langs, "val")
     tests = {l: load_split([l], "test") for l in TEST_LANGS}
 
@@ -150,7 +164,7 @@ def main():
             .to_csv(PREDS_DIR / f"{tag}_{lang}.csv", index=False)
 
     save_results(tag, results, {
-        "model": hf_name, "pooling": pooling, "init_dir": args.init_dir, "train_langs": args.train_langs, "n_train": len(train),
+        "model": hf_name, "pooling": pooling, "init_dir": args.init_dir, "extra_train": args.extra_train, "repeat_synthetic": args.repeat_synthetic, "train_langs": args.train_langs, "n_train": len(train),
         "epochs": args.epochs, "lr": args.lr, "batch_size": args.batch_size, "max_len": args.max_len,
         "best_val_macro_f1": best_f1, "history": history, "train_minutes": round((time.time() - start) / 60, 1),
     })

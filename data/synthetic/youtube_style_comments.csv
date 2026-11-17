@@ -1,0 +1,185 @@
+text,label,lang,phenomenon
+जलवायु परिवर्तन हमारे समय की सबसे बड़ी चुनौती है,Favour,hi,explicit
+ग्लोबल वार्मिंग को हल्के में लेना बहुत बड़ी गलती होगी,Favour,hi,explicit
+"हर साल गर्मी के रिकॉर्ड टूट रहे हैं, अब तो मानना पड़ेगा कि धरती गर्म हो रही है",Favour,hi,implicit
+"हिमालय के ग्लेशियर तेज़ी से पिघल रहे हैं, ये बहुत डराने वाली बात है",Favour,hi,implicit
+"सरकार को कोयले पर निर्भरता कम करनी चाहिए, वरना हालात और बिगड़ेंगे",Favour,hi,action
+हम सबको प्लास्टिक कम करना होगा और ज़्यादा पेड़ लगाने होंगे,Favour,hi,action
+"मेरे गाँव में अब पहले जैसी बारिश नहीं होती, किसान परेशान हैं, ये जलवायु बदलाव ही है",Favour,hi,implicit
+"बाढ़ और सूखा दोनों बढ़ रहे हैं, वैज्ञानिक सही कह रहे हैं",Favour,hi,implicit
+"ये कोई अफ़वाह नहीं है, जलवायु संकट असली है",Favour,hi,negation
+"जो लोग कहते हैं ग्लोबल वार्मिंग झूठ है, उन्हें एक बार दिल्ली की गर्मी में बाहर खड़ा कर दो",Favour,hi,sarcasm
+"वाह, मार्च में ही 42 डिग्री, और कुछ लोग अब भी कहते हैं सब नॉर्मल है",Favour,hi,sarcasm
+"समुद्र का स्तर बढ़ रहा है, मुंबई जैसे शहरों को सबसे ज़्यादा खतरा है",Favour,hi,implicit
+आने वाली पीढ़ियों के लिए हमें अभी से कदम उठाने होंगे,Favour,hi,action
+क्या हम तब जागेंगे जब पीने का पानी भी नहीं बचेगा? अभी कुछ करो,Favour,hi,question
+प्रदूषण और बढ़ता तापमान मिलकर हमारी सेहत बर्बाद कर रहे हैं,Favour,hi,implicit
+"इलेक्ट्रिक गाड़ियाँ और सोलर एनर्जी ही आगे का रास्ता है, जलवायु बचाना ज़रूरी है",Favour,hi,action
+मैं जलवायु परिवर्तन को लेकर सच में चिंतित हूँ,Favour,hi,explicit
+"इस वीडियो ने आँखें खोल दीं, ग्लोबल वार्मिंग बहुत गंभीर मुद्दा है",Favour,hi,explicit
+पहाड़ों में अचानक बादल फटना और भूस्खलन बढ़ना साफ़ संकेत है कि मौसम बिगड़ रहा है,Favour,hi,implicit
+"गर्मी से हर साल हज़ारों लोग मर रहे हैं, इसे इमरजेंसी मानना चाहिए",Favour,hi,explicit
+"जंगल काटना बंद करो, नहीं तो धरती रहने लायक नहीं बचेगी",Favour,hi,action
+बड़ी कंपनियों को अपना कार्बन उत्सर्जन घटाना ही होगा,Favour,hi,action
+ये सोचकर डर लगता है कि 2050 तक हालात कैसे होंगे,Favour,hi,implicit
+जलवायु परिवर्तन को नकारना अपने ही पैरों पर कुल्हाड़ी मारना है,Favour,hi,explicit
+आर्कटिक की बर्फ़ पिघलना पूरी दुनिया के लिए खतरे की घंटी है,Favour,hi,implicit
+"किसान भाई सबसे ज़्यादा झेल रहे हैं बदलते मौसम की मार, सरकार ध्यान दे",Favour,hi,implicit
+"ग्रेटा सही कहती है, हम सबको अपनी आदतें बदलनी पड़ेंगी",Favour,hi,explicit
+पेरिस समझौते का पालन हर देश को करना चाहिए,Favour,hi,action
+"ये गर्मी नॉर्मल नहीं है भाई, कुछ तो बहुत गलत हो रहा है 🥵",Favour,hi,implicit
+हम अपने बच्चों को कैसी धरती देकर जाएँगे? सोचो ज़रा,Favour,hi,question
+"ग्लोबल वार्मिंग एक ढकोसला है, मौसम तो हमेशा से बदलता रहा है",Against,hi,explicit
+"जलवायु परिवर्तन के नाम पर बस डराया जा रहा है, असल में कुछ नहीं हो रहा",Against,hi,explicit
+"गर्मी तो हमारे दादा-दादी के ज़माने में भी पड़ती थी, कोई नई बात नहीं",Against,hi,implicit
+वैज्ञानिक पैसा कमाने के लिए आंकड़े बढ़ा-चढ़ाकर बताते हैं,Against,hi,conspiracy
+"हाँ हाँ, अगले साल तक सारा समुद्र मुंबई में आ जाएगा 😂",Against,hi,sarcasm
+"इंसान मौसम बदल सकता है? भगवान से बड़ा कोई नहीं, ये सब बकवास है",Against,hi,explicit
+कार्बन टैक्स बस जनता से पैसे लूटने का तरीका है,Against,hi,conspiracy
+धरती गर्म हो रही है तो इतनी ठंड क्यों पड़ रही है? सब झूठ है,Against,hi,question
+मुझे इस क्लाइमेट वाले ड्रामे पर बिल्कुल भरोसा नहीं,Against,hi,explicit
+"ये तो प्रकृति का चक्र है, इसमें इंसानों का कोई हाथ नहीं",Against,hi,negation
+"जलवायु संकट जैसी कोई चीज़ नहीं होती, ये मीडिया की बनाई कहानी है",Against,hi,negation
+"हर साल कहते हैं दुनिया खत्म हो जाएगी, आज तक तो हुई नहीं 🙄",Against,hi,sarcasm
+"विकास ज़रूरी है, ग्लोबल वार्मिंग का डर दिखाकर कारखाने बंद मत करो",Against,hi,implicit
+"ये सब एनजीओ वालों का धंधा है, चंदा इकट्ठा करने के लिए",Against,hi,conspiracy
+थोड़ी सी गर्मी पड़ी नहीं कि सब क्लाइमेट चेंज चिल्लाने लगते हैं,Against,hi,implicit
+"ग्लोबल वार्मिंग? बाहर देखो, कितनी अच्छी ठंड है 😂",Against,hi,sarcasm
+मुझे नहीं लगता कि इंसान की वजह से मौसम बदल रहा है,Against,hi,negation
+"इन विदेशी एक्टिविस्टों की बातों में मत आओ, ये हमें पीछे रखना चाहते हैं",Against,hi,conspiracy
+जलवायु परिवर्तन इतना बड़ा मुद्दा नहीं जितना बताया जाता है,Against,hi,negation
+"बेकार की चिंता है, धरती अपने आप संभल जाएगी",Against,hi,explicit
+"बड़े-बड़े नेता प्राइवेट जेट में घूमकर हमें कार्बन पर भाषण देते हैं, सब नाटक है",Against,hi,sarcasm
+"ये सारे मॉडल गलत निकलते हैं, बीस साल पहले भी यही डर दिखाया था",Against,hi,explicit
+"गर्मी हमेशा से थी और रहेगी, इसमें क्लाइमेट चेंज कहाँ से आ गया",Against,hi,implicit
+धरती को बचाने का ठेका सिर्फ़ गरीब देशों ने ले रखा है क्या? सब फ़र्ज़ी है,Against,hi,conspiracy
+"बस करो यार, ग्लोबल वार्मिंग का रोना रोज़ का हो गया है, कुछ नहीं होने वाला",Against,hi,explicit
+"वैज्ञानिक खुद आपस में सहमत नहीं हैं, फिर हम क्यों मानें",Against,hi,explicit
+"सारी बर्फ़ पिघल जाएगी, शहर डूब जाएँगे... ये कहानियाँ बच्चों को सुनाओ",Against,hi,sarcasm
+"इस वीडियो का म्यूज़िक बहुत अच्छा है, कौन सा गाना है?",None,hi,unrelated
+आज मेरा मूड बहुत खराब है,None,hi,sentiment
+मैं बहुत खुश हूँ आज,None,hi,sentiment
+"कल भारत और पाकिस्तान का मैच है, कौन जीतेगा?",None,hi,unrelated
+ये वीडियो किस कैमरे से शूट किया है?,None,hi,unrelated
+जलवायु सम्मेलन अगले हफ़्ते दुबई में होगा,None,hi,topical
+क्या कोई बता सकता है कि कार्बन फ़ुटप्रिंट का मतलब क्या है?,None,hi,question
+"मुझे इस टॉपिक पर ज़्यादा जानकारी नहीं है, इसलिए कुछ नहीं कह सकता",None,hi,unclear
+आज दिल्ली में बारिश होगी क्या?,None,hi,question
+एंकर की आवाज़ बहुत अच्छी है,None,hi,unrelated
+पहला कमेंट मेरा 😎,None,hi,spam
+इस रिपोर्ट को किसने लिखा है?,None,hi,question
+मैं इस वीडियो को अपने दोस्तों के साथ शेयर करूँगा,None,hi,unrelated
+"नमस्ते सबको, आप सब कैसे हैं?",None,hi,unrelated
+कोई बताओ इस साल की सबसे गर्म तारीख कौन सी थी,None,hi,question
+हमारे स्कूल में कल पर्यावरण पर निबंध प्रतियोगिता है,None,hi,topical
+"वीडियो थोड़ा लंबा है, छोटा बनाओ",None,hi,unrelated
+मुझे भूख लगी है,None,hi,sentiment
+सरकार ने नई ट्रेन शुरू की है दिल्ली से पटना,None,hi,unrelated
+मैं कल शिमला घूमने जा रहा हूँ,None,hi,unrelated
+किसी को इस डॉक्यूमेंट्री का नाम पता है?,None,hi,question
+"तुम्हारी बात समझ नहीं आई, फिर से समझाओ",None,hi,unclear
+मैं नहीं जानता कि इस बारे में क्या सोचूँ,None,hi,unclear
+"জলবায়ু পরিবর্তন এখন আর ভবিষ্যতের সমস্যা নয়, এটা এখনই ঘটছে",Favour,bn,explicit
+"সুন্দরবন ধীরে ধীরে সমুদ্রে তলিয়ে যাচ্ছে, এটা খুব ভয়ের কথা",Favour,bn,implicit
+"প্রতি বছর গরম বাড়ছে, বৃষ্টির ধরণও বদলে গেছে",Favour,bn,implicit
+আমাদের সবাইকে গাছ লাগাতে হবে আর প্লাস্টিক কমাতে হবে,Favour,bn,action
+"বিশ্ব উষ্ণায়ন একটা গুরুতর বিপদ, এখনই ব্যবস্থা নিতে হবে",Favour,bn,explicit
+"ঘূর্ণিঝড় আগের চেয়ে অনেক বেশি শক্তিশালী হয়ে আসছে, বিজ্ঞানীরা ঠিকই বলছেন",Favour,bn,implicit
+"যারা বলে জলবায়ু পরিবর্তন মিথ্যা, তারা একবার উপকূলের মানুষদের দেখুক",Favour,bn,sarcasm
+"এটা কোনো গুজব নয়, জলবায়ু সংকট সত্যি",Favour,bn,negation
+সরকারের উচিত কয়লার ব্যবহার কমানো আর সৌরশক্তি বাড়ানো,Favour,bn,action
+আমাদের সন্তানদের জন্য পৃথিবীটা বাঁচাতে হবে,Favour,bn,action
+হিমবাহ গলে যাওয়া সত্যিই চিন্তার বিষয়,Favour,bn,implicit
+"এই গরম স্বাভাবিক না দাদা, কিছু একটা খুব ভুল হচ্ছে 🥵",Favour,bn,implicit
+"বন্যা আর খরা দুটোই বাড়ছে, এটাই জলবায়ু পরিবর্তনের প্রমাণ",Favour,bn,implicit
+"বাহ, এপ্রিলেই ৪৪ ডিগ্রি, তবু কেউ কেউ বলে সব ঠিক আছে",Favour,bn,sarcasm
+আমি জলবায়ু পরিবর্তন নিয়ে সত্যিই খুব ভয় পাই,Favour,bn,explicit
+বড় কোম্পানিগুলোকে কার্বন নিঃসরণ কমাতেই হবে,Favour,bn,action
+আমরা কি তখন জাগব যখন খাওয়ার জলও থাকবে না?,Favour,bn,question
+কৃষকরা আবহাওয়ার এই পরিবর্তনে সবচেয়ে বেশি কষ্ট পাচ্ছে,Favour,bn,implicit
+এই ভিডিওটা দেখে বুঝলাম বিশ্ব উষ্ণায়ন কতটা গুরুতর,Favour,bn,explicit
+"জলবায়ু পরিবর্তন সব মিথ্যা কথা, আবহাওয়া চিরকালই বদলায়",Against,bn,explicit
+"এসব পশ্চিমা দেশের চক্রান্ত, আমাদের উন্নয়ন আটকানোর জন্য",Against,bn,conspiracy
+"বিশ্ব উষ্ণায়ন বলে কোনো সমস্যা নেই, মিডিয়া ভয় দেখাচ্ছে",Against,bn,negation
+"গরম তো আমাদের দাদুর আমলেও পড়ত, নতুন কিছু না",Against,bn,implicit
+বিজ্ঞানীরা টাকার জন্য সংখ্যা বাড়িয়ে বলে,Against,bn,conspiracy
+মানুষ আবহাওয়া বদলাতে পারে? এসব বাজে কথা,Against,bn,question
+আমার মনে হয় না মানুষের জন্য জলবায়ু বদলাচ্ছে,Against,bn,negation
+"এটা প্রকৃতির নিজস্ব চক্র, এতে মানুষের কোনো ভূমিকা নেই",Against,bn,negation
+"প্রতি বছর বলে পৃথিবী ধ্বংস হবে, আজও তো কিছু হয়নি 🙄",Against,bn,sarcasm
+"কার্বন ট্যাক্স মানে জনগণের পকেট কাটা, আর কিছু না",Against,bn,conspiracy
+জলবায়ু সংকট যতটা বলা হয় ততটা বড় নয়,Against,bn,negation
+একটু গরম পড়লেই সবাই জলবায়ু পরিবর্তন বলে চেঁচায়,Against,bn,implicit
+বিশ্ব উষ্ণায়ন? বাইরে দেখো কী সুন্দর ঠান্ডা পড়েছে 😂,Against,bn,sarcasm
+"এসব এনজিওদের ব্যবসা, অনুদান তোলার জন্য",Against,bn,conspiracy
+"বিজ্ঞানীরাই একমত নন, তাহলে আমরা কেন বিশ্বাস করব",Against,bn,explicit
+"ভিডিওটা দারুণ লাগল, পরের পর্ব কবে আসবে?",None,bn,unrelated
+আজ আমার মনটা খুব খারাপ,None,bn,sentiment
+আজ কি কলকাতায় বৃষ্টি হবে?,None,bn,question
+"কাল ভারত আর বাংলাদেশের খেলা, কে জিতবে?",None,bn,unrelated
+জলবায়ু সম্মেলন আগামী মাসে হবে,None,bn,topical
+"কার্বন ফুটপ্রিন্ট মানে কী, কেউ বুঝিয়ে বলবেন?",None,bn,question
+এই বিষয়ে আমি তেমন কিছু জানি না,None,bn,unclear
+উপস্থাপকের গলাটা খুব সুন্দর,None,bn,unrelated
+প্রথম কমেন্ট আমার 😎,None,bn,spam
+আমি খুব খুশি আজ,None,bn,sentiment
+এই রিপোর্টটা কে লিখেছে?,None,bn,question
+আমি কাল দার্জিলিং বেড়াতে যাচ্ছি,None,bn,unrelated
+ভিডিওটা একটু ছোট করলে ভালো হতো,None,bn,unrelated
+সবাইকে শুভ সকাল,None,bn,unrelated
+আমি জানি না এ নিয়ে কী ভাবব,None,bn,unclear
+"climate change sach mein bahut badi problem hai, hum sabko kuch karna padega",Favour,hi-rom,explicit
+"har saal garmi badh rahi hai bhai, ye global warming hi hai",Favour,hi-rom,implicit
+"glacier pighal rahe hain, ye bahut darr wali baat hai",Favour,hi-rom,implicit
+"ped lagao plastic kam karo, warna aage bahut mushkil hogi",Favour,hi-rom,action
+jo log kehte hain global warming fake hai unko ek baar May mein Delhi bulao,Favour,hi-rom,sarcasm
+"ye garmi normal nahi hai yaar, kuch toh gadbad hai 🥵",Favour,hi-rom,implicit
+"global warming koi mazaak nahi hai, isse seriously lena chahiye",Favour,hi-rom,negation
+main climate change ko lekar sach mein worried hoon,Favour,hi-rom,explicit
+sarkar ko solar aur electric gaadiyon pe zyada dhyan dena chahiye,Favour,hi-rom,action
+"baadh aur sookha dono badh rahe hain, scientists sahi keh rahe hain",Favour,hi-rom,implicit
+"global warming ek dhokha hai, mausam toh hamesha badalta rehta hai",Against,hi-rom,explicit
+ye sab western countries ka propaganda hai bhai,Against,hi-rom,conspiracy
+"haan haan, kal hi duniya khatam ho jayegi 😂",Against,hi-rom,sarcasm
+"garmi toh pehle bhi padti thi, isme naya kya hai",Against,hi-rom,implicit
+mujhe nahi lagta insaan mausam badal sakta hai,Against,hi-rom,negation
+climate change ke naam pe sirf darr bechte hain ye log,Against,hi-rom,conspiracy
+carbon tax bas paisa lootne ka tarika hai,Against,hi-rom,conspiracy
+climate change itna bada issue nahi hai jitna dikhate hain,Against,hi-rom,negation
+"scientists khud confused hain, hum kyun maanein",Against,hi-rom,explicit
+bhai next video kab aayega?,None,hi-rom,unrelated
+mera channel bhi subscribe karo please,None,hi-rom,spam
+aaj mera mood kharab hai,None,hi-rom,sentiment
+kal match kaun jeetega?,None,hi-rom,unrelated
+video ka background music kaunsa hai?,None,hi-rom,unrelated
+carbon footprint ka matlab kya hota hai?,None,hi-rom,question
+mujhe is topic ke baare mein zyada nahi pata,None,hi-rom,unclear
+first comment 😎,None,hi-rom,spam
+aaj baarish hogi kya?,None,hi-rom,question
+main bahut khush hoon aaj,None,hi-rom,sentiment
+"jolbayu poriborton ekta gurutor somossa, ekhoni kichu korte hobe",Favour,bn-rom,explicit
+"protibochor gorom barche dada, eta global warming chara ar kichu na",Favour,bn-rom,implicit
+"sundarban dube jacche, khub bhoyer kotha",Favour,bn-rom,implicit
+"gach lagao, plastic komao, prithibi bachao",Favour,bn-rom,action
+"global warming sob miththe kotha, abhawa chirokal bodlay",Against,bn-rom,explicit
+egulo sob poschimi desher chokranto,Against,bn-rom,conspiracy
+"haan haan, kalkei prithibi shesh hoye jabe 😂",Against,bn-rom,sarcasm
+amar mone hoy na manush abhawa bodlate pare,Against,bn-rom,negation
+"video ta darun hoyeche, porer episode kobe?",None,bn-rom,unrelated
+amar channel ta subscribe korben please,None,bn-rom,spam
+aaj amar mon ta kharap,None,bn-rom,sentiment
+"carbon footprint mane ki, keu bolben?",None,bn-rom,question
+"Summers are getting hotter every year, this is clearly global warming",Favour,en,implicit
+"Climate change is not a hoax, it is real and dangerous",Favour,en,negation
+"Oh sure, 45 degrees in April is totally normal, nothing to worry about",Favour,en,sarcasm
+We must cut emissions and plant more trees for our children,Favour,en,action
+Global warming is a scam invented to raise taxes,Against,en,conspiracy
+"Yeah right, the oceans will swallow us all by next Tuesday 😂",Against,en,sarcasm
+"The climate has always changed, humans have nothing to do with it",Against,en,negation
+I don't believe in this climate crisis nonsense,Against,en,explicit
+Climate change is exaggerated by the media,Against,en,explicit
+"Nice video, what camera do you use?",None,en,unrelated
+Who will win the match tomorrow?,None,en,unrelated
+I am so tired today,None,en,sentiment
+Please subscribe to my channel,None,en,spam
+What does carbon footprint mean?,None,en,question

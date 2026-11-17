@@ -30,8 +30,9 @@ from preprocess import clean_text_steps  # noqa: E402
 app = Flask(__name__, static_folder=str(ROOT / "app" / "static"), static_url_path="/static")
 app.json.sort_keys = False  # keep Favour / Against / None order
 
-MODEL_INFO = {
-    "muril_tt": "MuRIL, translate-train (main model)",
+MODEL_INFO = {  # first available model is the default
+    "muril_robust1": "MuRIL robust: + SemEval tweets + YouTube-style comments (best for typed comments)",
+    "muril_tt": "MuRIL, translate-train (best on the formal test sets)",
     "muril_tt_rom": "MuRIL + romanised training (for Hindi/Bengali in English letters)",
     "xlmr_tt": "XLM-R, translate-train",
 }
@@ -62,6 +63,10 @@ def get_predictor(name):
         _loaded["predictor"] = StancePredictor(MODELS_DIR / name)
         _loaded["name"] = name
     return _loaded["predictor"]
+
+
+def default_model():
+    return next(k for k in MODEL_INFO if (MODELS_DIR / k).exists())
 
 
 def detect_script(text):
@@ -97,19 +102,21 @@ def info():
     models = {k: v for k, v in MODEL_INFO.items() if (MODELS_DIR / k).exists()}
     results = []
     order = ["tfidf_lr_en", "bert_en", "mbert_en", "xlmr_en", "muril_en", "llm_qwen1.5b_fewshot", "tfidf_lr_tt",
-             "mbert_tt", "xlmr_tt", "muril_tt", "ensemble_tt", "muril_tt_rom"]
+             "mbert_tt", "xlmr_tt", "muril_tt", "ensemble_tt", "muril_tt_rom", "muril_robust1"]
     names = {"tfidf_lr_en": "TF-IDF + LR", "bert_en": "English BERT (base paper)", "mbert_en": "mBERT",
              "xlmr_en": "XLM-R", "muril_en": "MuRIL", "llm_qwen1.5b_fewshot": "Qwen2.5-1.5B LLM",
              "tfidf_lr_tt": "TF-IDF + LR", "mbert_tt": "mBERT", "xlmr_tt": "XLM-R", "muril_tt": "MuRIL (main)",
+             "muril_robust1": "MuRIL robust (+SemEval +comments)",
              "ensemble_tt": "Ensemble mBERT+XLM-R+MuRIL", "muril_tt_rom": "MuRIL + romanised"}
     settings = {"en": "English only", "tt": "Translate-train", "llm": "Prompt only", "ens": "Translate-train",
-                "rom": "Translate-train + romanised"}
+                "rom": "Translate-train + romanised", "rob": "+ romanised, SemEval, comments"}
     for tag in order:
         p = METRICS_DIR / f"{tag}.json"
         if not p.exists():
             continue
         r = json.loads(p.read_text(encoding="utf8"))["results"]
-        kind = ("llm" if tag.startswith("llm") else "ens" if tag.startswith("ensemble") else "rom" if tag.endswith("rom")
+        kind = ("llm" if tag.startswith("llm") else "ens" if tag.startswith("ensemble") else "rob" if "robust" in tag
+                else "rom" if tag.endswith("rom")
                 else "en" if tag.endswith("_en") else "tt")
         results.append({"tag": tag, "name": names[tag], "setting": settings[kind],
                         **{lang: r[lang]["macro_f1"] for lang in ("en", "hi", "bn")}})
@@ -130,7 +137,7 @@ def info():
 def api_predict():
     body = request.get_json(force=True)
     text = (body.get("text") or "").strip()[:1000]
-    name = body.get("model") or "muril_tt"
+    name = body.get("model") or default_model()
     if not text:
         return jsonify(error="Please type a comment."), 400
     if name not in MODEL_INFO or not (MODELS_DIR / name).exists():
@@ -169,7 +176,7 @@ def api_predict():
 @app.post("/api/batch")
 def api_batch():
     f = request.files.get("file")
-    name = request.form.get("model") or "muril_tt"
+    name = request.form.get("model") or default_model()
     if not f:
         return jsonify(error="Upload a CSV file."), 400
     df = pd.read_csv(f, keep_default_na=False)
@@ -184,7 +191,7 @@ def api_batch():
 
 if __name__ == "__main__":
     print("Loading the main model ...")
-    get_predictor("muril_tt")
+    get_predictor(default_model())
     print("Open http://127.0.0.1:5000 in your browser")
     if "--open" in sys.argv:  # used by start_demo.bat: open the browser once the model is loaded
         import threading
