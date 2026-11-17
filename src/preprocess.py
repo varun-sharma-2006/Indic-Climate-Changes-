@@ -27,20 +27,34 @@ def split_hashtag(match: re.Match) -> str:
     return CAMEL_RE.sub(" ", word).replace("_", " ").lower()
 
 
-def clean_text(text: str) -> str:
+# (step name, function) in the order they are applied; the web demo shows each step
+STEPS = [
+    ("HTML entities → characters", html.unescape),
+    ("Unicode normalisation (NFC)", lambda t: unicodedata.normalize("NFC", t)),
+    ("Remove URLs", lambda t: URL_RE.sub(" ", t)),
+    ("@mentions → @user", lambda t: MENTION_RE.sub("@user", t)),
+    ("Split hashtags", lambda t: HASHTAG_RE.sub(split_hashtag, t)),
+    ("Emojis → words",  # emoji names use underscores: face_with_tears_of_joy
+     lambda t: re.sub(r"(?<=\w)_(?=\w)", " ", emoji.demojize(t, delimiters=(" ", " ")))),
+    ("Shorten repeated letters", lambda t: REPEAT_RE.sub(r"\1\1", t)),
+    ("Merge @user chains, extra spaces",  # long reply chains on Twitter
+     lambda t: SPACE_RE.sub(" ", re.sub(r"(@user\s*){2,}", "@user ", t)).strip()),
+]
+
+
+def clean_text_steps(text: str):
+    """Returns [(step name, text after the step), ...]."""
+    out = []
     if not isinstance(text, str):
-        return ""
-    text = html.unescape(text)
-    text = unicodedata.normalize("NFC", text)
-    text = URL_RE.sub(" ", text)
-    text = MENTION_RE.sub("@user", text)
-    text = HASHTAG_RE.sub(split_hashtag, text)
-    text = emoji.demojize(text, delimiters=(" ", " "))
-    text = re.sub(r"(?<=\w)_(?=\w)", " ", text)  # emoji names use underscores
-    text = REPEAT_RE.sub(r"\1\1", text)
-    text = re.sub(r"(@user\s*){2,}", "@user ", text)  # long reply chains on Twitter
-    text = SPACE_RE.sub(" ", text).strip()
-    return text
+        text = ""
+    for name, fn in STEPS:
+        text = fn(text)
+        out.append((name, text))
+    return out
+
+
+def clean_text(text: str) -> str:
+    return clean_text_steps(text)[-1][1]
 
 
 if __name__ == "__main__":

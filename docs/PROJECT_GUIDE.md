@@ -250,6 +250,18 @@ All numbers: `results/results_table.md`, `results/metrics/*.json`, chart `result
 
 ## 10. Live demo (what to run, in this order)
 
+**Easiest: the web demo.** Double-click `start_demo.bat` in the project folder. The browser opens at http://127.0.0.1:5000 once the model is loaded (~10 s). Click an example or type a comment and press **Analyse**. The page shows all six steps of how the model reaches its answer:
+1. raw input
+2. each cleaning step and what it changed
+3. script detection
+4. the sub-word tokens MuRIL reads
+5. the probabilities
+6. word importance: each word is removed in turn to see how much the confidence drops
+
+Use the *Results* tab for the numbers and charts, and *Batch file* to classify a CSV. A link such as `http://127.0.0.1:5000/?q=<comment>` opens with that comment already analysed.
+
+Command-line alternative:
+
 ```powershell
 cd "D:\Stance in Indic Climate"
 .\.venv\Scripts\Activate.ps1

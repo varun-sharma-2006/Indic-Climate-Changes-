@@ -371,12 +371,13 @@ MEMBERS = [
         "name": "Advay Sinha (S24CSEU2059)",
         "role": "LLM baseline, ensemble, explainability (LIME), prediction / demo, results and report",
         "files": "`src/llm_fewshot.py`, `src/ensemble.py`, `src/explain_lime.py`, `src/predict.py`, `src/eval_challenge.py`, "
-                 "`src/evaluate_saved.py`, `src/summarize_results.py`, `docs/make_progress_report.py`",
+                 "`src/evaluate_saved.py`, `src/summarize_results.py`, `docs/make_progress_report.py`, `app/server.py` (web demo)",
         "built": [
             "Qwen2.5-1.5B-Instruct few-shot prompt baseline (label definitions + 1 example per class).",
             "Probability-averaging ensembles (3 models and 2 models).",
             "LIME explanations with whitespace word splitting for Hindi/Bengali.",
-            "Prediction script for the live demo and the `ID, Predicted Label` submission file; challenge-set evaluation.",
+            "Prediction script and the `ID, Predicted Label` submission file; challenge-set evaluation.",
+            "Web demo (`app/`): shows each pipeline step, the probabilities and word importance for any comment.",
         ],
         "explain": [
             f"LLM without training is weak ({f1('llm_qwen1.5b_fewshot', 'hi'):.2f} / {f1('llm_qwen1.5b_fewshot', 'bn'):.2f}); fine-tuning matters.",
@@ -445,9 +446,20 @@ def part_d(doc):
          "(`results/dataset_stats.md`, class_distribution.png); GitHub repository structure"],
         ["2", "Yashika", "2 min", "Preprocessing live: `python src/preprocess.py`; TF-IDF results English-only vs translate-train; why Macro F1"],
         ["3", "Priyanshu", "3 min", "Transformer models, zero-shot vs translate-train, MuRIL mean-pooling fix; results table and chart"],
-        ["4", "Advay", "3 min", "Live predictions (below), submission file, LLM and ensemble results, LIME, challenges and future work; hand over the printed 2-page report"],
+        ["4", "Advay", "3 min", "Web demo: live predictions step by step (below), submission file, LLM and ensemble results, LIME, challenges and future work; hand over the printed 2-page report"],
     ], widths=[1.3, 2.2, 1.8, 11.5])
 
+    doc.add_heading("Web demo (show this to the teacher)", level=2)
+    para(doc, "Double-click **start_demo.bat** in the project folder. The browser opens at http://127.0.0.1:5000 once the model "
+              "is loaded (~10 seconds). Keep the black window open; closing it stops the demo.")
+    for s in ["**Live demo tab:** click an example (or type a comment) and press *Analyse*. The page shows the six steps: raw input → "
+              "each cleaning step and what it changed → script detection → the sub-word tokens the model reads → probabilities "
+              "for Favour / Against / None → word importance (each word removed in turn to see how much the confidence drops).",
+              "**Model menu:** switch to *MuRIL + romanised* for comments typed in English letters (the page suggests this automatically).",
+              "**How it works tab:** training pipeline, dataset statistics, base paper vs our project.",
+              "**Results tab:** all experiments, charts and confusion matrices.",
+              "**Batch file tab:** upload a CSV with ID,text and download the submission file."]:
+        bullet(doc, s)
     doc.add_heading("Live demo commands (tested on 17 Nov 2026)", level=2)
     code_block(doc, [
         'cd "D:\\Stance in Indic Climate"',

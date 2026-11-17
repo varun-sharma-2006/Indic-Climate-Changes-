@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indic Climate Stance – Live Demo</title>
+<style>
+  :root {
+    --bg: #f6f3ec; --card: #fffdf8; --ink: #12262b; --muted: #5b6b6f; --line: #e2dccf;
+    --accent: #1f6f6a; --accent-ink: #ffffff; --warm: #a8431d;
+    --favour: #2a7f62; --against: #c0532b; --none: #6b7a7e;
+    --fav-bg: #dcefe6; --ag-bg: #f6e0d6; --none-bg: #e7eaeb;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font-family: "Segoe UI", "Nirmala UI", system-ui, sans-serif; font-size: 16px; line-height: 1.5; }
+  header { background: var(--ink); color: #f6f3ec; padding: 22px 32px 0; }
+  header h1 { margin: 0; font-size: 26px; font-weight: 600; }
+  header .sub { color: #bfd3d2; margin: 4px 0 14px; font-size: 15px; }
+  .badge { display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 999px;
+           background: #1b3a40; color: #f0a170; margin-left: 8px; vertical-align: middle; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav button { background: transparent; border: 0; color: #bfd3d2; padding: 10px 18px; font: inherit;
+               font-size: 15px; cursor: pointer; border-radius: 10px 10px 0 0; }
+  nav button.active { background: var(--bg); color: var(--ink); font-weight: 600; }
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 32px 60px; }
+  .tab { display: none; } .tab.active { display: block; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+  h2 { font-size: 20px; margin: 0 0 10px; } h3 { font-size: 16px; margin: 0 0 8px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  textarea { width: 100%; min-height: 96px; font: inherit; font-size: 18px; padding: 12px; border-radius: 10px;
+             border: 1px solid var(--line); resize: vertical; background: #fff; }
+  select, .btn { font: inherit; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: #fff; }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; cursor: pointer; padding: 10px 22px; }
+  .btn.primary:disabled { opacity: .6; cursor: wait; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 12px; cursor: pointer;
+          font-size: 14px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chip b { color: var(--warm); font-weight: 600; margin-right: 6px; }
+  .chip:hover { border-color: var(--accent); }
+  .verdict { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .verdict .label { font-size: 30px; font-weight: 700; padding: 6px 22px; border-radius: 12px; }
+  .Favour { color: var(--favour); } .Against { color: var(--against); } .None { color: var(--none); }
+  .bg-Favour { background: var(--fav-bg); } .bg-Against { background: var(--ag-bg); } .bg-None { background: var(--none-bg); }
+  .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; opacity: 0; transform: translateY(8px);
+          transition: opacity .35s, transform .35s; }
+  .step.show { opacity: 1; transform: none; }
+  .num { width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: #fff; display: grid;
+         place-items: center; font-weight: 600; }
+  .clean-step { display: grid; grid-template-columns: 230px 1fr; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+  .clean-step.same { color: #9aa5a8; }
+  .clean-step .txt { font-size: 15px; word-break: break-word; }
+  .tag-changed { color: var(--warm); font-weight: 600; font-size: 12px; margin-left: 6px; }
+  .tokens { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tok { background: #eef3f2; border: 1px solid #d4e2e0; border-radius: 6px; padding: 2px 7px; font-family: Consolas, monospace; font-size: 14px; }
+  .bar-row { display: grid; grid-template-columns: 90px 1fr 60px; gap: 10px; align-items: center; margin: 6px 0; }
+  .bar { height: 22px; background: #edeae2; border-radius: 6px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; width: 0; transition: width .8s ease; border-radius: 6px; }
+  .words { font-size: 20px; line-height: 2.2; }
+  .w { padding: 3px 5px; border-radius: 6px; margin: 0 1px; }
+  .legend { display: flex; gap: 16px; font-size: 13px; color: var(--muted); margin-top: 8px; flex-wrap: wrap; }
+  .legend span::before { content: ""; display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; background: var(--c); }
+  .flow { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
+  .box { flex: 1 1 150px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .box b { display: block; margin-bottom: 4px; }
+  .arrow { align-self: center; color: var(--warm); font-size: 22px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); }
+  th { background: #efe9dc; }
+  tr.base td { background: #fbeee6; } tr.main td { background: #e3f1ec; font-weight: 600; }
+  .mini { display: inline-block; height: 10px; background: var(--accent); border-radius: 3px; vertical-align: middle; margin-right: 6px; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .grid2 img { width: 100%; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+  .stat { font-size: 28px; font-weight: 700; }
+  .err { color: var(--against); font-weight: 600; margin-top: 8px; }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid #cfd8d6; border-top-color: var(--accent);
+             border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: -3px; margin-right: 6px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 700px) { main, header { padding-left: 16px; padding-right: 16px; } .clean-step { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Detecting Stance on Global Warming in Hindi &amp; Bengali <span class="badge" id="device">…</span></h1>
+  <div class="sub">Claim: <b>“Climate change and global warming is a serious concern.”</b> &nbsp;→&nbsp; Favour / Against / None
+    &nbsp;·&nbsp; Varun Sharma · Yashika Garg · Priyanshu Raj · Advay Sinha</div>
+  <nav>
+    <button class="active" data-tab="demo">Live demo</button>
+    <button data-tab="how">How it works</button>
+    <button data-tab="results">Results</button>
+    <button data-tab="batch">Batch file</button>
+  </nav>
+</header>
+
+<main>
+<!-- ============ LIVE DEMO ============ -->
+<section class="tab active" id="demo">
+  <div class="card">
+    <h2>Type a comment</h2>
+    <textarea id="text" placeholder="Type or paste a Hindi, Bengali, romanised or English comment…"></textarea>
+    <div class="row">
+      <label class="muted" for="model">Model</label>
+      <select id="model"></select>
+      <button class="btn primary" id="go">Analyse ▸</button>
+      <span id="status" class="muted"></span>
+    </div>
+    <div class="muted" style="margin-top:12px">Try an example:</div>
+    <div class="chips" id="examples"></div>
+    <div class="err" id="error"></div>
+  </div>
+
+  <div id="out" style="display:none">
+    <div class="card verdict" id="verdict"></div>
+
+    <div class="card step" id="s1"><div class="num">1</div><div>
+      <h3>Input: the raw comment</h3><div id="raw" style="font-size:18px"></div></div></div>
+
+    <div class="card step" id="s2"><div class="num">2</div><div>
+      <h3>Cleaning (preprocessing)</h3>
+      <div class="muted">Our <code>preprocess.py</code> applies these steps in order. Highlighted steps changed the text.</div>
+      <div id="clean"></div></div></div>
+
+    <div class="card step" id="s3"><div class="num">3</div><div>
+      <h3>Script / language detection</h3><div id="script"></div></div></div>
+
+    <div class="card step" id="s4"><div class="num">4</div><div>
+      <h3>Tokenisation: what the model actually reads</h3>
+      <div class="muted" id="toknote" style="margin-bottom:8px"></div>
+      <div class="tokens" id="tokens"></div></div></div>
+
+    <div class="card step" id="s5"><div class="num">5</div><div>
+      <h3>Model prediction</h3>
+      <div class="muted" id="modeldesc" style="margin-bottom:6px"></div>
+      <div id="probs"></div></div></div>
+
+    <div class="card step" id="s6"><div class="num">6</div><div>
+      <h3>Why? Word importance</h3>
+      <div class="muted">We remove each word one at a time and measure how much the model's confidence in its answer drops.
+        Big drop = important word.</div>
+      <div class="words" id="words"></div>
+      <div class="legend" id="legend"></div></div></div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="tab" id="how">
+  <div class="card">
+    <h2>The problem</h2>
+    <p>Labelled climate-stance data exists only in <b>English</b>, but we need to classify <b>Hindi and Bengali</b> comments.
+      Our base paper, <a href="https://aclanthology.org/2020.findings-emnlp.296" target="_blank">Luo, Card &amp; Jurafsky (2020),
+      “Detecting Stance in Media on Global Warming”</a>, solved this for English news only. Its model (English BERT) gets
+      75% accuracy on English but fails on Hindi/Bengali.</p>
+  </div>
+  <div class="card">
+    <h2>How we trained the model</h2>
+    <div class="flow">
+      <div class="box"><b>1 · English data</b>GWSD (base paper, 2,050 news sentences) + ClimateStance (3,580 tweets)</div>
+      <div class="arrow">→</div>
+      <div class="box"><b>2 · Translate</b>NLLB-200 → Hindi and Bengali (same labels), plus romanised copies</div>
+      <div class="arrow">→</div>
+      <div class="box"><b>3 · Clean</b>URLs, @mentions, hashtags, emojis → words, repeated letters</div>
+      <div class="arrow">→</div>
+      <div class="box"><b>4 · Fine-tune</b>MuRIL (Indian-language BERT) on En + Hi + Bn, class-weighted loss</div>
+      <div class="arrow">→</div>
+      <div class="box"><b>5 · Evaluate</b>Macro F1 on 555 test sentences per language</div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h2>Dataset</h2>
+      <div id="stats"></div>
+    </div>
+    <div class="card">
+      <h2>Base paper vs our project</h2>
+      <table>
+        <tr><th></th><th>Base paper</th><th>Ours</th></tr>
+        <tr><td>Languages</td><td>English</td><td>Hindi, Bengali, English</td></tr>
+        <tr><td>Text</td><td>News sentences</td><td>News + tweets, romanised text</td></tr>
+        <tr><td>Models</td><td>English BERT</td><td>TF-IDF, mBERT, XLM-R, MuRIL, LLM, ensemble</td></tr>
+        <tr><td>Imbalance</td><td>–</td><td>Class-weighted loss, Macro F1</td></tr>
+        <tr><td>Explanations</td><td>–</td><td>Word importance, LIME, error analysis</td></tr>
+        <tr><td>Hindi F1</td><td id="bp-hi">–</td><td id="our-hi">–</td></tr>
+        <tr><td>Bengali F1</td><td id="bp-bn">–</td><td id="our-bn">–</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="tab" id="results">
+  <div class="card">
+    <h2>All experiments (Macro F1 on the test sets)</h2>
+    <div class="muted">English only = trained like the base paper. Translate-train = trained on English + Hindi + Bengali (our method).</div>
+    <table id="restable" style="margin-top:10px"></table>
+  </div>
+  <div class="grid2" id="figs"></div>
+</section>
+
+<!-- ============ BATCH ============ -->
+<section class="tab" id="batch">
+  <div class="card">
+    <h2>Classify a whole file</h2>
+    <p class="muted">Upload a CSV with columns <code>ID</code> and <code>text</code>. You get back <code>ID, Predicted Label</code>,
+      the submission format for the course.</p>
+    <form id="batchform" class="row">
+      <input type="file" name="file" accept=".csv" required>
+      <select name="model" id="bmodel"></select>
+      <button class="btn primary" type="submit">Predict file ▸</button>
+      <span id="bstatus" class="muted"></span>
+    </form>
+  </div>
+</section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const COLORS = { Favour: "var(--favour)", Against: "var(--against)", None: "var(--none)" };
+let INFO = null;
+
+function showTab(name) {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("active", x.dataset.tab === name));
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.id === name));
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => { showTab(b.dataset.tab); history.replaceState(null, "", "#" + b.dataset.tab); });
+if (["demo", "how", "results", "batch"].includes(location.hash.slice(1))) showTab(location.hash.slice(1));
+
+function el(tag, attrs = {}, text) {
+  const e = document.createElement(tag);
+  Object.entries(attrs).forEach(([k, v]) => k === "style" ? e.style.cssText = v : e.setAttribute(k, v));
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+async function loadInfo() {
+  INFO = await (await fetch("/api/info")).json();
+  $("device").textContent = INFO.device;
+  for (const sel of [$("model"), $("bmodel")]) {
+    Object.entries(INFO.models).forEach(([k, v]) => sel.appendChild(el("option", { value: k }, v)));
+  }
+  INFO.examples.forEach(ex => {
+    const c = el("button", { class: "chip", title: ex.text });
+    c.appendChild(el("b", {}, ex.lang)); c.appendChild(document.createTextNode(ex.text));
+    c.onclick = () => { $("text").value = ex.text; analyse(); };
+    $("examples").appendChild(c);
+  });
+  renderStats(); renderResults();
+}
+
+function renderStats() {
+  const s = INFO.stats, box = $("stats");
+  box.innerHTML = "";
+  const top = el("div", { class: "row", style: "gap:28px;margin-top:0" });
+  [["English examples", s.total], ["× languages", "3 (+2 romanised)"], ["test / language", s.splits.test]].forEach(([k, v]) => {
+    const d = el("div"); d.appendChild(el("div", { class: "stat" }, v)); d.appendChild(el("div", { class: "muted" }, k)); top.appendChild(d);
+  });
+  box.appendChild(top);
+  box.appendChild(el("h3", { style: "margin-top:14px" }, "Class distribution"));
+  Object.entries(s.labels).forEach(([l, n]) => box.appendChild(barRow(l, n / s.total, `${n} (${Math.round(100 * n / s.total)}%)`, COLORS[l], 110)));
+  box.appendChild(el("div", { class: "muted", style: "margin-top:8px" },
+    `Sources: ${Object.entries(s.sources).map(([k, v]) => `${k} ${v}`).join(" · ")}  ·  Splits: train ${s.splits.train} / val ${s.splits.val} / test ${s.splits.test}`));
+}
+
+function renderResults() {
+  const t = $("restable");
+  t.innerHTML = "<tr><th>Model</th><th>Training data</th><th>English</th><th>Hindi</th><th>Bengali</th></tr>";
+  INFO.results.forEach(r => {
+    const tr = el("tr", { class: r.tag === "bert_en" ? "base" : r.tag === "muril_tt" ? "main" : "" });
+    tr.appendChild(el("td", {}, r.name)); tr.appendChild(el("td", {}, r.setting));
+    ["en", "hi", "bn"].forEach(l => {
+      const td = el("td"); const m = el("span", { class: "mini", style: `width:${Math.round(r[l] * 80)}px` });
+      td.appendChild(m); td.appendChild(document.createTextNode(r[l].toFixed(3))); tr.appendChild(td);
+    });
+    t.appendChild(tr);
+    if (r.tag === "bert_en") { $("bp-hi").textContent = r.hi.toFixed(3); $("bp-bn").textContent = r.bn.toFixed(3); }
+    if (r.tag === "muril_tt") { $("our-hi").textContent = r.hi.toFixed(3); $("our-bn").textContent = r.bn.toFixed(3); }
+  });
+  const caps = { "model_comparison.png": "Macro F1 of every experiment", "class_distribution.png": "Class distribution per dataset",
+    "length_distribution.png": "Text length per language", "cm_muril_tt_hi.png": "Confusion matrix – main model, Hindi",
+    "cm_muril_tt_bn.png": "Confusion matrix – main model, Bengali" };
+  INFO.figures.forEach(f => {
+    const c = el("div", { class: "card" }); c.appendChild(el("h3", {}, caps[f] || f));
+    c.appendChild(el("img", { src: "/figures/" + f, alt: caps[f] || f })); $("figs").appendChild(c);
+  });
+}
+
+function barRow(label, frac, valueText, color, labelWidth = 90) {
+  const r = el("div", { class: "bar-row", style: `grid-template-columns:${labelWidth}px 1fr 90px` });
+  r.appendChild(el("div", { style: `color:${color};font-weight:600` }, label));
+  const b = el("div", { class: "bar" }); const s = el("span", { style: `background:${color}` }); b.appendChild(s); r.appendChild(b);
+  r.appendChild(el("div", { class: "muted" }, valueText));
+  requestAnimationFrame(() => setTimeout(() => s.style.width = Math.max(1, frac * 100) + "%", 50));
+  return r;
+}
+
+async function analyse() {
+  const text = $("text").value.trim();
+  $("error").textContent = "";
+  if (!text) { $("error").textContent = "Please type a comment first."; return; }
+  $("go").disabled = true;
+  $("status").innerHTML = '<span class="spinner"></span>Running the model…';
+  try {
+    const res = await fetch("/api/predict", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, model: $("model").value }) });
+    const d = await res.json();
+    if (!res.ok) throw new Error(d.error || "Request failed");
+    render(d);
+    $("status").textContent = `Done in ${d.ms} ms`;
+  } catch (e) {
+    $("error").textContent = e.message; $("status").textContent = "";
+  } finally { $("go").disabled = false; }
+}
+
+function render(d) {
+  $("out").style.display = "block";
+  document.querySelectorAll(".step").forEach(s => s.classList.remove("show"));
+
+  const v = $("verdict"); v.innerHTML = "";
+  const conf = Math.round(d.probs[d.label] * 100);
+  v.appendChild(el("div", { class: `label ${d.label} bg-${d.label}` }, d.label));
+  const vt = el("div");
+  vt.appendChild(el("div", { style: "font-size:18px;font-weight:600" }, `${conf}% confident`));
+  vt.appendChild(el("div", { class: "muted" }, `${d.model_desc} · ${d.ms} ms`));
+  v.appendChild(vt);
+
+  $("raw").textContent = d.input;
+
+  const cl = $("clean"); cl.innerHTML = "";
+  d.steps.forEach(s => {
+    const r = el("div", { class: "clean-step" + (s.changed ? "" : " same") });
+    const name = el("div", {}, s.step); if (s.changed) name.appendChild(el("span", { class: "tag-changed" }, "changed"));
+    r.appendChild(name); r.appendChild(el("div", { class: "txt" }, s.changed ? s.text : "no change"));
+    cl.appendChild(r);
+  });
+
+  const sc = $("script"); sc.innerHTML = "";
+  Object.entries(d.script.shares).forEach(([k, v]) => sc.appendChild(barRow(k, v / 100, v + "%", "var(--accent)", 170)));
+  if (d.script.note) sc.appendChild(el("div", { class: "muted", style: "margin-top:6px" }, d.script.note));
+
+  $("toknote").textContent = `The cleaned text is split into ${d.n_tokens} sub-word pieces from the model's vocabulary. ` +
+    `Rare words are broken into smaller pieces (marked ## or ▁).`;
+  const tk = $("tokens"); tk.innerHTML = "";
+  d.tokens.forEach(t => tk.appendChild(el("span", { class: "tok" }, t)));
+  if (d.n_tokens > d.tokens.length) tk.appendChild(el("span", { class: "muted" }, `… +${d.n_tokens - d.tokens.length} more`));
+
+  $("modeldesc").textContent = "12 transformer layers turn the tokens into vectors → averaged into one sentence vector → a final layer gives a probability for each class:";
+  const pr = $("probs"); pr.innerHTML = "";
+  Object.entries(d.probs).forEach(([l, p]) => pr.appendChild(barRow(l, p, (p * 100).toFixed(1) + "%", COLORS[l])));
+
+  const w = $("words"); w.innerHTML = "";
+  const max = Math.max(0.01, ...d.importance.map(x => Math.abs(x.score)));
+  if (!d.importance.length) w.appendChild(el("span", { class: "muted" }, "(needs at least two words)"));
+  d.importance.forEach(x => {
+    const a = Math.min(1, Math.abs(x.score) / max);
+    const rgb = x.score >= 0 ? "42,127,98" : "192,83,43";
+    const s = el("span", { class: "w", title: `confidence drops by ${(x.score * 100).toFixed(1)} points without this word`,
+      style: `background:rgba(${rgb},${(0.12 + 0.6 * a).toFixed(2)})` }, x.word);
+    w.appendChild(s); w.appendChild(document.createTextNode(" "));
+  });
+  $("legend").innerHTML = "";
+  $("legend").appendChild(el("span", { style: "--c:rgba(42,127,98,.7)" }, `supports “${d.label}” (stronger colour = more important)`));
+  $("legend").appendChild(el("span", { style: "--c:rgba(192,83,43,.7)" }, `pushes away from “${d.label}”`));
+  $("legend").appendChild(el("span", {}, "Hover a word to see the exact number."));
+
+  ["s1", "s2", "s3", "s4", "s5", "s6"].forEach((id, i) => setTimeout(() => $(id).classList.add("show"), 150 + i * 350));
+  $("verdict").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+$("go").onclick = analyse;
+$("text").addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) analyse(); });
+
+$("batchform").onsubmit = async (e) => {
+  e.preventDefault();
+  $("bstatus").innerHTML = '<span class="spinner"></span>Predicting…';
+  try {
+    const res = await fetch("/api/batch", { method: "POST", body: new FormData(e.target) });
+    if (!res.ok) throw new Error((await res.json()).error || "Failed");
+    const blob = await res.blob(); const a = el("a", { href: URL.createObjectURL(blob), download: "predictions.csv" });
+    document.body.appendChild(a); a.click(); a.remove();
+    $("bstatus").textContent = "Done: predictions.csv downloaded.";
+  } catch (err) { $("bstatus").textContent = "Error: " + err.message; }
+};
+
+loadInfo().then(() => {
+  // a link like /?q=<comment>&model=muril_tt_rom opens the demo with that comment already analysed
+  const p = new URLSearchParams(location.search);
+  if (p.get("model")) $("model").value = p.get("model");
+  if (p.get("q")) { $("text").value = p.get("q"); analyse(); }
+});
+</script>
+</body>
+</html>

@@ -180,6 +180,9 @@ python src/explain_lime.py --model_dir models/xlmr_tt
 python src/summarize_results.py
 ```
 
+**Web demo (best for showing the teacher):** double-click `start_demo.bat` (or run `python app/server.py`), then open http://127.0.0.1:5000.
+For any comment it shows every step: raw text → each cleaning step → script detection → the sub-word tokens the model reads → class probabilities → which words drove the decision. Tabs: *How it works* (pipeline, dataset, base paper vs ours), *Results* (all experiments, charts, confusion matrices), *Batch file* (upload `ID,text` CSV → download `ID, Predicted Label`).
+
 **Demo / prediction:**
 ```powershell
 python src/predict.py --model_dir models/muril_tt --text "ग्लोबल वार्मिंग एक गंभीर समस्या है"

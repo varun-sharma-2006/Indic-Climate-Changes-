@@ -23,4 +23,5 @@ tqdm>=4.66
 emoji>=2.0                # emoji -> words in preprocessing
 lime>=0.2                 # explanations
 python-docx>=1.1          # progress report generator
+flask>=3.0                # web demo (app/server.py)
 indic-transliteration>=2.3  # romanisation augmentation / robustness tests (stance/ package)
