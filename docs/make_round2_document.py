@@ -291,8 +291,11 @@ def part_a(doc):
     table(doc, [
         ["Model", "Macro F1 Hindi", "Macro F1 Bengali"],
         ["Base paper's approach (English BERT, English data)", f"{f1('bert_en', 'hi'):.3f}", f"{f1('bert_en', 'bn'):.3f}"],
-        ["**Our main model: MuRIL, translate-train**", f"**{f1('muril_tt', 'hi'):.3f}**", f"**{f1('muril_tt', 'bn'):.3f}**"],
+        ["MuRIL, translate-train (best on the formal test sets)", f"{f1('muril_tt', 'hi'):.3f}", f"{f1('muril_tt', 'bn'):.3f}"],
+        ["**Final model: MuRIL robust 2** (+ SemEval, Kaggle tweets, YouTube-style comments)", f"**{f1('muril_robust2', 'hi'):.3f}**", f"**{f1('muril_robust2', 'bn'):.3f}**"],
     ], widths=[9, 3.5, 3.5])
+    para(doc, "On comment-style text never used for training, the final model is much stronger: hand-written challenge set "
+              "macro F1 0.658 → **0.773**, held-out Kaggle tweets 0.48 → **0.66** (Hindi), sanity sentences **17/18**.")
 
 
 MEMBERS = [
@@ -305,6 +308,7 @@ MEMBERS = [
             "Made the splits: GWSD's own 200 held-out sentences + ClimateStance's official test split as test; same split for every language (no leakage).",
             "Translated all 5,630 sentences to Hindi and Bengali with NLLB-200 and fixed ~40 outputs that got stuck repeating one word.",
             "Created romanised Hindi/Bengali copies (e.g. \"global varmimg eka gambhir samasya hai\").",
+            "Added extra training data for robustness: SemEval-2016 climate tweets, 6,000 Kaggle climate tweets (fixed their text-encoding errors) and the YouTube-style comment set (`src/extra_data.py`).",
         ],
         "explain": [
             "Why GWSD: same claim as ours, from the base paper. Why ClimateStance: social-media text (tweets), closer to YouTube comments.",
@@ -328,6 +332,7 @@ MEMBERS = [
             "TF-IDF (word 1–2 grams + character 2–5 grams) with Logistic Regression and Linear SVM.",
             "Metric code: Macro F1, accuracy, macro precision/recall, per-class F1, confusion matrices.",
             "Error analysis by language, source dataset and class.",
+            "Sanity check (18 evaluator-style sentences) and the robustness report on data never used for training.",
         ],
         "explain": [
             f"TF-IDF trained on English only scores {f1('tfidf_lr_en', 'hi'):.2f} on Hindi; with translations "
@@ -351,7 +356,7 @@ MEMBERS = [
             "Training loop: AdamW, lr 3e-5, batch 16, fp16, class-weighted loss, best epoch by validation Macro F1.",
             "Frozen word embeddings so XLM-R and MuRIL fit in the 4 GB GPU.",
             "Found and fixed the MuRIL problem: [CLS] vectors were identical for all sentences; switched to mean pooling.",
-            "Continued fine-tuning (`--init_dir`) for the romanised model.",
+            "Continued fine-tuning (`--init_dir`) for the romanised model and the final robust model (`--extra_train`).",
         ],
         "explain": [
             f"Base paper's BERT: 75% English accuracy, but {f1('bert_en', 'hi'):.2f} / {f1('bert_en', 'bn'):.2f} F1 on Hindi/Bengali.",
@@ -469,13 +474,13 @@ def part_d(doc):
         "python src/preprocess.py",
         "",
         "# 2. live predictions with our main model (Advay)        expected",
-        'python src/predict.py --model_dir models/muril_tt --text "ग्लोबल वार्मिंग एक गंभीर समस्या है, हमें अभी कदम उठाने होंगे"   # Favour',
-        'python src/predict.py --model_dir models/muril_tt --text "ये सब क्लाइमेट चेंज का ड्रामा है, गर्मी तो हमेशा पड़ती थी"      # Against',
-        'python src/predict.py --model_dir models/muril_tt --text "ভিডিওটা দারুণ হয়েছে দাদা, পরের পর্ব কবে?"                      # None',
-        'python src/predict.py --model_dir models/muril_tt --text "জলবায়ু পরিবর্তন সত্যিই ভয়ংকর"                                  # Favour',
+        'python src/predict.py --model_dir models/muril_robust2 --text "ग्लोबल वार्मिंग एक गंभीर समस्या है, हमें अभी कदम उठाने होंगे"   # Favour',
+        'python src/predict.py --model_dir models/muril_robust2 --text "ये सब क्लाइमेट चेंज का ड्रामा है, गर्मी तो हमेशा पड़ती थी"      # Against',
+        'python src/predict.py --model_dir models/muril_robust2 --text "ভিডিওটা দারুণ হয়েছে দাদা, পরের পর্ব কবে?"                      # None',
+        'python src/predict.py --model_dir models/muril_robust2 --text "জলবায়ু পরিবর্তন সত্যিই ভয়ংকর"                                  # Favour',
         "",
         "# 3. submission file from a CSV with columns ID,text",
-        "python src/predict.py --model_dir models/muril_tt --input my_test.csv --output submission.csv",
+        "python src/predict.py --model_dir models/muril_robust2 --input my_test.csv --output submission.csv",
         "",
         "# 4. (optional, about 1 minute) re-run the TF-IDF baselines live",
         "python src/baselines.py",

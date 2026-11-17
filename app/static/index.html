@@ -265,7 +265,7 @@ function renderResults() {
   const t = $("restable");
   t.innerHTML = "<tr><th>Model</th><th>Training data</th><th>English</th><th>Hindi</th><th>Bengali</th></tr>";
   INFO.results.forEach(r => {
-    const tr = el("tr", { class: r.tag === "bert_en" ? "base" : r.tag === "muril_tt" ? "main" : "" });
+    const tr = el("tr", { class: r.tag === "bert_en" ? "base" : r.tag === "muril_robust2" ? "main" : "" });
     tr.appendChild(el("td", {}, r.name)); tr.appendChild(el("td", {}, r.setting));
     ["en", "hi", "bn"].forEach(l => {
       const td = el("td"); const m = el("span", { class: "mini", style: `width:${Math.round(r[l] * 80)}px` });
@@ -273,7 +273,7 @@ function renderResults() {
     });
     t.appendChild(tr);
     if (r.tag === "bert_en") { $("bp-hi").textContent = r.hi.toFixed(3); $("bp-bn").textContent = r.bn.toFixed(3); }
-    if (r.tag === "muril_tt") { $("our-hi").textContent = r.hi.toFixed(3); $("our-bn").textContent = r.bn.toFixed(3); }
+    if (r.tag === "muril_robust2") { $("our-hi").textContent = r.hi.toFixed(3); $("our-bn").textContent = r.bn.toFixed(3); }
   });
   const caps = { "model_comparison.png": "Macro F1 of every experiment", "class_distribution.png": "Class distribution per dataset",
     "length_distribution.png": "Text length per language", "cm_muril_tt_hi.png": "Confusion matrix – main model, Hindi",

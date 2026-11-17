@@ -45,3 +45,9 @@ runs/*/pred_valid.csv
 
 # datasets downloaded by hand that we do not use / redistribute
 climate-fever.csv/
+
+# Kaggle tweets and files derived from them stay local (regenerate with src/extra_data.py)
+data/external/raw/twitter_sentiment_data.csv
+data/extra/kaggle*.csv
+data/extra/extra_train.csv
+data/extra/extra_test.csv

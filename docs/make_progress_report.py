@@ -34,6 +34,7 @@ ROWS = [
     ("muril_tt", "MuRIL (mean pooling)", "Translate-train"),
     ("ensemble_tt", "Ensemble (mBERT + XLM-R + MuRIL)", "Translate-train"),
     ("ensemble2_tt", "Ensemble (XLM-R + MuRIL)", "Translate-train"),
+    ("muril_robust2", "MuRIL robust (final model)", "+ romanised, SemEval, Kaggle, comments"),
 ]
 
 
@@ -181,7 +182,7 @@ def main():
         r = m[tag]["results"]
         res_rows.append([name, setting, *[f"{r[l]['macro_f1']:.3f}" for l in ("en", "hi", "bn")],
                          f"{r['hi']['accuracy']:.3f}", f"{r['bn']['accuracy']:.3f}"])
-        if tag == "muril_tt":
+        if tag == "muril_robust2":
             bold.append(len(res_rows) - 1)
     add_table(doc, ["Model", "Training data", "F1 En", "F1 Hi", "F1 Bn", "Acc Hi", "Acc Bn"], res_rows,
               [5.2, 3.6, 1.5, 1.5, 1.5, 1.5, 1.5], bold_rows=tuple(bold))
@@ -202,6 +203,11 @@ def main():
                     "(XLM-R collapses to ~0.2). Two more epochs with romanised copies of the training data raise this to "
                     f"{after['hr']['macro_f1']:.2f} / {after['br']['macro_f1']:.2f}, at a small cost on native script "
                     f"({after['hi']['macro_f1']:.3f} / {after['bn']['macro_f1']:.3f}).", "Romanised text (augmentation): ")
+    bullet(doc, "Continued training on SemEval-2016 climate tweets, 6,000 Kaggle climate tweets and 184 YouTube-style "
+                "comments (written with an AI assistant, disclosed). On data never used for training it raises the "
+                "hand-written challenge set from 0.66 to 0.77 macro F1, sarcasm from 0/8 to 5/8 and held-out tweets from "
+                "0.48 to 0.66 F1 (Hindi), for a 0.03 drop on the formal Hindi test set. This is our final model.",
+           "Robust final model: ")
     ch_path = ROOT / "results" / "challenge_set_metrics.json"
     if ch_path.exists():
         ch = json.loads(ch_path.read_text(encoding="utf8"))
@@ -210,10 +216,7 @@ def main():
                     "statements are always correct, but sarcasm (38% accuracy) and romanized Hindi/Bengali (20%) are "
                     "the main weaknesses.", "Hand-written challenge set: ")
 
-    fig = ROOT / "results" / "figures" / "model_comparison.png"
-    if fig.exists():
-        doc.add_picture(str(fig), width=Cm(9.5))
-        doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    # the comparison chart (results/figures/model_comparison.png) is left out to keep the report to two pages
 
     # 4. challenges
     heading(doc, "4. Challenges Encountered")
@@ -278,7 +281,7 @@ def ANALYSIS(m, f1):
                     f"{max(gains):+.2f} depending on the model."))
     best = max((t for t, _, _ in ROWS if m.get(t)), key=lambda t: (f1(t, "hi") + f1(t, "bn")) / 2)
     names = {t: n for t, n, _ in ROWS}
-    out.append(("Best system: ", f"{names[best]} (translate-train) with Macro F1 {f1(best, 'hi'):.3f} (Hindi) and {f1(best, 'bn'):.3f} "
+    out.append(("Best on these test sets: ", f"{names[best]} (translate-train) with Macro F1 {f1(best, 'hi'):.3f} (Hindi) and {f1(best, 'bn'):.3f} "
                 f"(Bengali), against {f1('bert_en', 'hi'):.3f} / {f1('bert_en', 'bn'):.3f} for the base paper's model."))
     return out
 

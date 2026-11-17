@@ -63,16 +63,33 @@ def semeval():
     return d
 
 
+def fix_mojibake(t: str) -> str:
+    """The Kaggle file has UTF-8 text decoded as Windows-1252 (e.g. 'Ã¢â‚¬Â¦' instead of '…'); undo it."""
+    for _ in range(3):
+        if not re.search(r"[ÃÂâ]", t):
+            break
+        try:
+            t = t.encode("cp1252").decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            break
+    return t
+
+
 def kaggle(per_class):
     if not KAGGLE_FILE.exists():
         print(f"(Kaggle file not found at {KAGGLE_FILE}; skipping it)")
         return None
     d = pd.read_csv(KAGGLE_FILE)
-    d["text"] = d["message"].astype(str).map(lambda t: re.sub(r"^RT @\w+:\s*", "", t))
+    d["text"] = d["message"].astype(str).map(fix_mojibake).map(lambda t: re.sub(r"^RT @\w+:\s*", "", t))
+    d["text"] = d["text"].str.replace("$q$", "'", regex=False)  # the file writes apostrophes as $q$
     d["label"] = d["sentiment"].map({1: "Favour", -1: "Against", 0: "None", 2: "None"})
     d = d.dropna(subset=["label"]).drop_duplicates("text")
     d = d[d["text"].map(lambda t: len(clean_text(t).split()) >= 4)]
-    d = d.groupby("label", group_keys=False).apply(lambda g: g.sample(min(len(g), per_class), random_state=SEED))
+    # None: mostly genuinely neutral tweets; news headlines (2) often read as Favour, so only 25% of None
+    news = d[d["sentiment"] == 2].sample(per_class // 4, random_state=SEED)
+    neutral = d[d["sentiment"] == 0].sample(per_class - per_class // 4, random_state=SEED)
+    d = pd.concat([d[d["label"] != "None"], neutral, news])
+    d = pd.concat([g.sample(min(len(g), per_class), random_state=SEED) for _, g in d.groupby("label")])
     d = d.sample(frac=1, random_state=SEED).reset_index(drop=True)
     d["split"] = ["test" if i % 10 == 0 else "train" for i in range(len(d))]
     d["id"] = "kaggle_" + d["tweetid"].astype(str)

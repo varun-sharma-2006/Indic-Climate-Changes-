@@ -24,6 +24,8 @@ def main():
             setting = "Ensemble"
         elif langs == ["prompt only"]:
             setting = "Few-shot prompt (no training)"
+        elif m.get("extra_train"):
+            setting = "Translate-train + romanised + SemEval/Kaggle/comments"
         elif "hr" in langs:
             setting = "Translate-train + romanised (En+Hi+Bn+HiRom+BnRom)"
         else:

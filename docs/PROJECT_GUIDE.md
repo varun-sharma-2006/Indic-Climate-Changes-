@@ -118,7 +118,19 @@ Many Indians type Hindi/Bengali in English letters ("garmi bahut badh gayi hai")
 
 64 comments written in YouTube style, created during Milestone 1 and stored in our repo (not translations): Hindi 25, Bengali 22, romanised Hindi 9, romanised Bengali 6, English 2. Labels: Favour 29, Against 20, None 15. Each is tagged with a phenomenon (explicit, implicit, sarcasm, negation, romanised, unrelated, code-mixed, typo, …). It is small, so we use it **only for testing**, to see how models handle natural comment-style text.
 
-### 4.7 Data still to come
+### 4.7 Extra training data for robustness (`src/extra_data.py` → `data/extra/`)
+
+| Dataset | Where from | What | Used |
+|---|---|---|---|
+| **SemEval-2016 Task 6** (target "Climate Change is a Real Concern") | https://huggingface.co/datasets/cardiffnlp/tweet_eval (`stance_climate`) | English tweets, human-labelled | 395 train; 169 extra test |
+| **Kaggle Twitter Climate Change Sentiment** (Edward Qian) | https://www.kaggle.com/datasets/edqian/twitter-climate-change-sentiment-dataset (manual download → `data/external/raw/twitter_sentiment_data.csv`) | 43,943 English tweets 2015–2018, human-labelled | 5,400 train; 600 extra test. pro → Favour, anti → Against, neutral (75%) / news (25%) → None. Text-encoding errors repaired. |
+| **YouTube-style comments** (ours, synthetic) | `data/synthetic/youtube_style_comments.csv` | 184 short comments in Hindi, Bengali, romanised and English, **written with an AI assistant** and checked by us (LLM-based augmentation); any sentence similar to a test/challenge/sanity sentence was removed | training only (repeated 3×) |
+
+All English tweets are translated to Hindi/Bengali with NLLB-200 and romanised, like the main data. These sources are used **only for training** (plus their own held-out parts as extra test sets). Our original test sets, the challenge set and the sanity sentences are never trained on.
+
+**Why:** the original training data is formal news and 2019 tweets; evaluators and real users type short, informal comments with sarcasm and negation. The Kaggle set alone adds ~2,000 real denial tweets (our weakest class).
+
+### 4.8 Data still to come
 
 | Data | Status |
 |---|---|
@@ -201,6 +213,21 @@ Test sets: 555 examples per language (Hindi/Bengali test sets are translations o
 
 XLM-R almost fails on romanised text, while MuRIL (pre-trained with transliterated text) keeps working. Continued training with romanised copies adds **+0.10 / +0.08** F1 on romanised text for a small loss on native script. Training from scratch on all five versions underfitted in 4 epochs (loss still 1.02), so continuing from the trained model was the better choice. On the 64 hand-written comments the romanised model gets 10/15 romanised comments right (vs 9/15) but 2 fewer native-script ones, so **`muril_tt` stays our main model** and `muril_tt_rom` is the option for mostly-romanised input.
 
+### 7.1 Robustness on typed comments (the final model for the demo)
+
+The test sets above are formal news sentences and 2019 tweets. To make the model work on short, informal comments, the kind an evaluator types, we continued training MuRIL on extra data (`src/extra_data.py`): **SemEval-2016** climate-stance tweets, a balanced sample of **6,000 Kaggle climate tweets** (incl. ~2,000 denial tweets), and **184 YouTube-style comments**, all translated to Hindi/Bengali and romanised. We evaluate on data **never used for training** (`src/robustness_report.py`, [results/robustness_report.md](results/robustness_report.md)):
+
+| | MuRIL (translate-train) | Robust 1 (+SemEval, comments) | **Robust 2 (+SemEval, Kaggle, comments)** |
+|---|---|---|---|
+| Hand-written challenge set (64 comments), macro F1 | 0.658 | 0.723 | **0.773** |
+| Sarcasm / negation / implicit (challenge set) | 0/8 · 5/8 · 8/13 | 4/8 · 4/8 · 9/13 | **5/8 · 7/8 · 10/13** |
+| Sanity sentences (18) | 16/18 | 17/18 | **17/18** |
+| Held-out Kaggle tweets, F1 Hi / Bn | 0.48 / 0.46 | 0.47 / 0.47 | **0.66 / 0.65** |
+| Held-out SemEval tweets, F1 Hi / Bn | 0.46 / 0.43 | 0.52 / 0.50 | **0.55 / 0.55** |
+| Original translated test sets, F1 Hi / Bn | **0.662 / 0.650** | 0.659 / 0.619 | 0.631 / 0.647 |
+
+**`muril_robust2` is our final model and the web-demo default**: much better on comment-style text, at a small cost on the formal Hindi test set. The remaining errors are mostly sarcasm.
+
 **What the results show**
 1. The base paper's approach works for English (75% accuracy) but **fails on Hindi/Bengali**.
 2. **Translate-train beats English-only for every model** (+0.06 to +0.22 F1).
@@ -246,6 +273,8 @@ All numbers: `results/results_table.md`, `results/metrics/*.json`, chart `result
 14. **What are your main weaknesses?** Sarcasm, romanised text, and the Favour/None boundary.
 15. **What will you do before the final evaluation?** See section 11.
 16. **Why is "मैं खुश नहीं हूँ" ("I am not happy") predicted as None?** Because it is **correct**. It expresses a feeling but says nothing about climate change, so it takes no stance on the claim. Stance ≠ sentiment. "मैं जलवायु परिवर्तन से खुश नहीं हूँ, ये बहुत खतरनाक है" ("I am not happy about climate change, it is very dangerous") is predicted **Favour**.
+18. **Did you use AI-generated data?** Yes, and we disclose it: 184 short YouTube-style training comments were written with an AI assistant and checked by us. This is LLM-based data augmentation. They are used **only for training**; we removed any sentence similar to an evaluation sentence, and all reported improvements are measured on data never used for training (challenge set, held-out Kaggle/SemEval tweets).
+19. **Why is your final model slightly worse on the Hindi test set?** The test set is formal translated news/tweets. The robust model trades 0.03 F1 there for large gains on comment-style text (challenge set 0.66 → 0.77, held-out tweets 0.47 → 0.66), which matches our task (YouTube comments).
 17. **Does it work on sentences we type ourselves?** `python src/sanity_check.py` tests 18 hand-written sentences (negation, "I don't think…", off-topic, Bengali, romanised, sarcasm). MuRIL gets **16/18**; the two mistakes are both sarcasm, our known weakness.
 
 ---
@@ -272,9 +301,9 @@ cd "D:\Stance in Indic Climate"
 python src/data_stats.py
 
 # 2. classify sentences live with our best model
-python src/predict.py --model_dir models/muril_tt --text "ग्लोबल वार्मिंग एक गंभीर समस्या है, हमें अभी कदम उठाने होंगे"
-python src/predict.py --model_dir models/muril_tt --text "ये सब क्लाइमेट चेंज का ड्रामा है, गर्मी तो हमेशा पड़ती थी"
-python src/predict.py --model_dir models/muril_tt --text "ভিডিওটা দারুণ হয়েছে দাদা, পরের পর্ব কবে?"
+python src/predict.py --model_dir models/muril_robust2 --text "ग्लोबल वार्मिंग एक गंभीर समस्या है, हमें अभी कदम उठाने होंगे"
+python src/predict.py --model_dir models/muril_robust2 --text "ये सब क्लाइमेट चेंज का ड्रामा है, गर्मी तो हमेशा पड़ती थी"
+python src/predict.py --model_dir models/muril_robust2 --text "ভিডিওটা দারুণ হয়েছে দাদা, পরের পর্ব কবে?"
 #    expected: Favour / Against / None
 
 # 3. show results: results/results_table.md, results/figures/model_comparison.png,

@@ -25,6 +25,12 @@ python src/train_transformer.py --model muril --init_dir models/muril_tt --train
 python src/evaluate_saved.py --model_dir models/muril_tt --langs hr br
 python src/evaluate_saved.py --model_dir models/xlmr_tt --langs hr br
 
+# 4g. robustness: extra data (SemEval-2016, Kaggle tweets - manual download -, synthetic comments) and the final model
+python src/extra_data.py --kaggle_per_class 2000
+python src/train_transformer.py --model muril --init_dir models/muril_tt --train_langs en hi bn hr br --extra_train data/extra/extra_train.csv --repeat_synthetic 3 --epochs 2 --lr 2e-5 --save --tag muril_robust2
+python src/robustness_report.py --model_dirs models/muril_tt models/muril_robust2
+python src/sanity_check.py --model_dirs models/muril_robust2
+
 # 5. ensemble of the translate-train models
 python src/ensemble.py --tags mbert_tt xlmr_tt muril_tt --name ensemble_tt
 python src/ensemble.py --tags xlmr_tt muril_tt --name ensemble2_tt
