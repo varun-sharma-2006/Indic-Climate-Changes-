@@ -385,7 +385,11 @@ $("batchform").onsubmit = async (e) => {
     const blob = await res.blob(); const a = el("a", { href: URL.createObjectURL(blob), download: "predictions.csv" });
     document.body.appendChild(a); a.click(); a.remove();
     $("bstatus").textContent = "Done: predictions.csv downloaded.";
-  } catch (err) { $("bstatus").textContent = "Error: " + err.message; }
+  } catch (err) {
+    $("bstatus").textContent = err.message === "Failed to fetch"
+      ? "Error: could not reach the server. Make sure start_demo.bat is still running, reload this page (F5) and choose the file again."
+      : "Error: " + err.message;
+  }
 };
 
 loadInfo().then(() => {

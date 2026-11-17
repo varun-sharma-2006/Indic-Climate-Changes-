@@ -180,12 +180,24 @@ def api_batch():
     name = request.form.get("model") or default_model()
     if not f:
         return jsonify(error="Upload a CSV file."), 400
-    df = pd.read_csv(f, keep_default_na=False)
-    cols = {c.lower(): c for c in df.columns}
-    id_col = cols.get("id", df.columns[0])
-    text_col = cols.get("text", cols.get("comment", df.columns[-1]))
-    preds = get_predictor(name).predict(df[text_col].astype(str).tolist())
-    out = pd.DataFrame({"ID": df[id_col], "Predicted Label": preds})
+    try:
+        df = pd.read_csv(f, keep_default_na=False, dtype=str)
+    except Exception as e:
+        return jsonify(error=f"Could not read the CSV: {e}"), 400
+    if df.empty:
+        return jsonify(error="The CSV has no rows."), 400
+    if len(df) > 5000:
+        return jsonify(error=f"The file has {len(df)} rows; please upload at most 5000."), 400
+    cols = {c.strip().lower(): c for c in df.columns}
+    # ID column: "id", else any column ending in "id", else the row number
+    id_col = cols.get("id") or next((c for k, c in cols.items() if k.endswith("id")), None)
+    ids = df[id_col] if id_col else pd.Series(range(1, len(df) + 1))
+    # text column: a known name, else the column with the longest text on average
+    text_col = next((cols[k] for k in ("text", "comment", "comments", "sentence", "tweet", "claim") if k in cols), None)
+    if text_col is None:
+        text_col = max(df.columns, key=lambda c: df[c].str.len().mean())
+    preds = get_predictor(name).predict(df[text_col].tolist())
+    out = pd.DataFrame({"ID": ids.values, "Predicted Label": preds})
     buf = io.BytesIO(out.to_csv(index=False).encode("utf-8-sig"))
     return send_file(buf, mimetype="text/csv", as_attachment=True, download_name="predictions.csv")
 
