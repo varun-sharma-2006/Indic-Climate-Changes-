@@ -42,3 +42,6 @@ results/logs/
 results/lime/*.html
 reports/eda/*/features.csv
 runs/*/pred_valid.csv
+
+# datasets downloaded by hand that we do not use / redistribute
+climate-fever.csv/
