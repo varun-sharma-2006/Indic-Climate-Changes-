@@ -402,6 +402,9 @@ MEMBERS = [
 
 def part_c(doc):
     doc.add_heading("Part C. Individual Contributions", level=1)
+    para(doc, "**Use of AI tools:** we used an AI coding assistant (Claude, by Anthropic) to help write and debug code, "
+              "generate the report documents and draft the 184 synthetic training comments (disclosed in the README). "
+              "The team chose the approach, ran every experiment, checked the outputs and can explain each part.")
     para(doc, "**How we worked:** the four of us discussed and worked on every part of the project together. "
               "For clarity, each member took **primary responsibility** for one area, listed below. That is the part "
               "they implemented, maintain and explain in depth, while helping on the others.")

@@ -250,7 +250,9 @@ stance/, scripts/, reports/, runs/   Milestone 1 exploration pipeline
 
 Libraries: PyTorch, Hugging Face Transformers, scikit-learn, pandas, matplotlib, seaborn, emoji, LIME.
 Pre-trained models: `bert-base-uncased`, `bert-base-multilingual-cased`, `xlm-roberta-base`, `google/muril-base-cased`, `facebook/nllb-200-distilled-600M` (translation), `Qwen/Qwen2.5-1.5B-Instruct` (LLM).
-Datasets: GWSD (Luo et al., 2020), ClimateStance (Vaid et al., 2022).
+Datasets: GWSD (Luo et al., 2020), ClimateStance (Vaid et al., 2022), SemEval-2016 Task 6, Kaggle Twitter Climate Change Sentiment.
+
+**Use of AI tools.** We used an AI coding assistant (Claude, by Anthropic) to help write and debug code, generate the report documents, and draft the 184 synthetic YouTube-style training comments (see Section 2). The team chose the approach, ran every experiment, checked the outputs and results, and can explain each part of the code. All numbers in this repository come from the scripts here.
 
 ## 8. References
 
