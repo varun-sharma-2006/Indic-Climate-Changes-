@@ -44,9 +44,22 @@ def main():
     ap.add_argument("--id_col", default="ID")
     ap.add_argument("--text_col", default="text")
     ap.add_argument("--text", help="classify a single comment")
+    ap.add_argument("--interactive", action="store_true", help="load the model once, then classify typed comments")
     args = ap.parse_args()
 
     predictor = StancePredictor(args.model_dir)
+    if args.interactive:
+        print("Type a comment and press Enter (empty line or 'exit' to stop).")
+        while True:
+            try:
+                text = input("\ncomment> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                break
+            if not text or text.lower() in ("exit", "quit"):
+                break
+            probs = predictor.predict_proba([text])[0]
+            print(f"  -> {LABELS[probs.argmax()]}   " + "  ".join(f"{l}={p:.2f}" for l, p in zip(LABELS, probs)))
+        return
     if args.text:
         probs = predictor.predict_proba([args.text])[0]
         print(f"{LABELS[probs.argmax()]}  " + "  ".join(f"{l}={p:.2f}" for l, p in zip(LABELS, probs)))

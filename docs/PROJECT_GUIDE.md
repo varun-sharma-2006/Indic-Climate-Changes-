@@ -314,6 +314,13 @@ python src/predict.py --model_dir models/muril_robust2 --text "ये सब क
 python src/predict.py --model_dir models/muril_robust2 --text "ভিডিওটা দারুণ হয়েছে দাদা, পরের পর্ব কবে?"
 #    expected: Favour / Against / None
 
+# 2b. let the teacher type many comments (model loads once; empty line to stop)
+python src/predict.py --model_dir models/muril_robust2 --interactive
+
+# 2c. the 18 test sentences and the 64-comment file -> submission CSV
+python src/sanity_check.py --model_dirs models/muril_robust2
+python src/predict.py --model_dir models/muril_robust2 --input data/challenge/challenge_hi_bn.csv --id_col id --output results/submission.csv
+
 # 3. show results: results/results_table.md, results/figures/model_comparison.png,
 #    results/figures/cm_muril_tt_hi.png, results/lime/summary.md
 
