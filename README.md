@@ -115,7 +115,7 @@ Macro F1 and accuracy on the test sets (555 examples per language). All numbers 
 | Ensemble mBERT+XLM-R+MuRIL | Translate-train | 0.671 | 0.675 | 0.620 | 0.742 | 0.712 |
 | Ensemble XLM-R+MuRIL | Translate-train | 0.667 | 0.672 | 0.626 | 0.746 | 0.717 |
 
-**Stability check (different random seed):** re-training MuRIL translate-train with seed 13 gives F1 0.668 / 0.648 / 0.624 (En / Hi / Bn) vs 0.655 / 0.662 / 0.650 with seed 42, a variation of about ±0.01–0.03. MuRIL stays ahead of XLM-R and mBERT on Hindi and Bengali (`results/metrics/muril_tt_seed13.json`).
+**Stability check (3 random seeds: 42, 13, 7):** MuRIL translate-train gives Macro F1 **0.655 ± 0.014 / 0.658 ± 0.009 / 0.639 ± 0.014** (En / Hi / Bn, mean ± std; `python src/seed_summary.py muril_tt muril_tt_seed13 muril_tt_seed7`, [results/seed_summary.md](results/seed_summary.md)). The spread is small and MuRIL stays ahead of XLM-R and mBERT on Hindi and Bengali. Training curves: [results/figures/training_curves.png](results/figures/training_curves.png).
 
 ![Model comparison](results/figures/model_comparison.png)
 
