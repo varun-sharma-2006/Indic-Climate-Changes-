@@ -275,8 +275,8 @@ def part_a(doc):
         ["**Implementation**: running code + performance metrics", "Done",
          "`src/` (18 scripts), `run_all.ps1`; live demo with `src/predict.py`; `results/results_table.md`", "Yashika, Advay"],
         ["**GitHub**: complete code, proper organisation", "Done", REPO, "Varun"],
-        ["**GitHub**: contributions from **all** members", "**TO DO**",
-         "Currently all commits are by Varun. Each member must push their own commit (Part C)", "Everyone"],
+        ["**GitHub**: contributions from **all** members", "**In progress**",
+         "Commits from Varun and Yashika are on GitHub; Priyanshu and Advay still push their own commit (Part C)", "Priyanshu, Advay"],
         ["**Individual contributions** clearly explained", "Done (document)", "`CONTRIBUTIONS.md`; Part C of this file", "Everyone"],
         ["**Every member understands the project**", "**TO DO**",
          "Each member reads Part B and rehearses the questions in §9 and Part C", "Everyone"],
@@ -326,7 +326,7 @@ MEMBERS = [
     {
         "name": "Yashika Garg (S24CSEU0235)",
         "role": "Preprocessing, TF-IDF baselines, evaluation metrics, error analysis",
-        "files": "`src/preprocess.py`, `src/baselines.py`, `src/data_utils.py`, `src/error_analysis.py`",
+        "files": "`src/preprocess.py`, `tests/test_preprocess.py`, `src/baselines.py`, `src/data_utils.py`, `src/error_analysis.py`",
         "built": [
             "Cleaning for noisy text: HTML entities, Unicode NFC, URLs removed, @mentions → @user, hashtag splitting, emojis → words, repeated letters shortened.",
             "TF-IDF (word 1–2 grams + character 2–5 grams) with Logistic Regression and Linear SVM.",
@@ -346,7 +346,7 @@ MEMBERS = [
             "What is the difference between precision and recall?",
         ],
         "task": "Add `tests/test_preprocess.py` with 5–6 small checks of `clean_text()` (URL removed, hashtag split, emoji converted, "
-                "repeated letters, Hindi/Bengali text unchanged) and run it with `pip install pytest` then `python -m pytest tests`. Commit and push.",
+                "repeated letters, Hindi/Bengali text unchanged) and run it with `pip install pytest` then `python -m pytest tests`. Commit and push. **Done** (7 tests pass).",
     },
     {
         "name": "Priyanshu Raj (S24CSEU1142)",
@@ -406,8 +406,9 @@ def part_c(doc):
               "For clarity, each member took **primary responsibility** for one area, listed below. That is the part "
               "they implemented, maintain and explain in depth, while helping on the others.")
     para(doc, "Every member must be able to explain the whole project (Part B) and, in detail, their own part. "
-              "The evaluation also checks **GitHub contributions from every member**. At the moment all commits are by Varun, "
-              "so each member must make **their own commit** before the evaluation (the task under each name).")
+              "The evaluation also checks **GitHub contributions from every member**. Varun and Yashika (unit tests for "
+              "preprocessing, `tests/test_preprocess.py`) have committed; Priyanshu and Advay must make **their own commit** "
+              "before the evaluation (the task under each name).")
     for m in MEMBERS:
         doc.add_heading(m["name"], level=2)
         para(doc, f"**Role:** {m['role']}")

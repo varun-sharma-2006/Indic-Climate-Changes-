@@ -151,7 +151,7 @@ The test sets above are formal news sentences and 2019 tweets. To make the model
 
 **`muril_robust2` is our final model and the web-demo default**: much better on comment-style text, at a small cost on the formal Hindi test set. The remaining errors are mostly sarcasm.
 
-**Sanity check** (`python src/sanity_check.py`, 18 sentences an evaluator might type: negation, "I don't think…", sentiment without stance, off-topic, Bengali, romanised, sarcasm): MuRIL **16/18** correct; both mistakes are sarcasm.
+**Sanity check** (`python src/sanity_check.py`, 18 sentences an evaluator might type: negation, "I don't think…", sentiment without stance, off-topic, Bengali, romanised, sarcasm): final model **17/18** correct (earlier MuRIL 16/18); the remaining mistake is romanised sarcasm.
 
 **Hand-written challenge set** (64 Hindi/Bengali comments in YouTube style, not translations): XLM-R macro F1 **0.68**, MuRIL **0.66**, final model (MuRIL Robust 2) **0.77**. Explicit statements are always correct; **sarcasm** (5/8 for the final model, 0/8 before) is still the main weak point, especially in romanized Hindi/Bengali ([results/challenge_set_results.md](results/challenge_set_results.md)).
 
@@ -198,6 +198,9 @@ python src/ensemble.py --tags mbert_tt xlmr_tt muril_tt --name ensemble_tt
 python src/llm_fewshot.py
 python src/explain_lime.py --model_dir models/xlmr_tt
 python src/summarize_results.py
+
+# unit tests for the text cleaning
+python -m pytest tests
 ```
 
 **Web demo (best for showing the teacher):** double-click `start_demo.bat` (or run `python app/server.py`), then open http://127.0.0.1:5000.
@@ -233,6 +236,7 @@ src/
   summarize_results.py   results table and comparison chart
   models.py              [CLS] / mean-pooling classifiers (mean pooling used for MuRIL)
   error_analysis.py      errors by language, dataset and class
+tests/                   unit tests (python -m pytest tests)
 data/processed/          english.csv, hindi.csv, bengali.csv
 data/challenge/          64 hand-written Hindi/Bengali comments (Milestone 1 challenge set)
 results/                 metrics (JSON), predictions, figures, results_table.md, LIME output

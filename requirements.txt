@@ -26,4 +26,5 @@ python-docx>=1.1          # progress report generator
 flask>=3.0                # web demo (app/server.py)
 indic-transliteration>=2.3  # romanisation augmentation / robustness tests (stance/ package)
 markdown
+pytest
 pywin32; sys_platform == "win32"

@@ -51,3 +51,5 @@ data/external/raw/twitter_sentiment_data.csv
 data/extra/kaggle*.csv
 data/extra/extra_train.csv
 data/extra/extra_test.csv
+
+.pytest_cache/
