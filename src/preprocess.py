@@ -57,7 +57,25 @@ def clean_text(text: str) -> str:
     return clean_text_steps(text)[-1][1]
 
 
+def show_steps(text: str):
+    """Print what each cleaning step changes (used in the live demo)."""
+    print(f"input : {text}")
+    prev = text
+    for name, out in clean_text_steps(text):
+        mark = "changed" if out != prev else "-"
+        print(f"  {name:34s} {mark:8s} {out}")
+        prev = out
+    print(f"output: {prev}\n")
+
+
 if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser(description="Show the text cleaning step by step.")
+    ap.add_argument("--text", help="clean this text (otherwise three built-in examples)")
+    args = ap.parse_args()
+    if args.text:
+        show_steps(args.text)
+        raise SystemExit
     samples = [
         "@a @b @c Climate change is a HOAX!!! 😂😂 https://t.co/xyz #ClimateHoax",
         "ग्लोबल वार्मिंग बहुतttt बढ़ गई है 🔥🔥",
