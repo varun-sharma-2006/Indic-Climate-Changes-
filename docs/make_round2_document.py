@@ -276,7 +276,7 @@ def part_a(doc):
          "`src/` (18 scripts), `run_all.ps1`; live demo with `src/predict.py`; `results/results_table.md`", "Yashika, Advay"],
         ["**GitHub**: complete code, proper organisation", "Done", REPO, "Varun"],
         ["**GitHub**: contributions from **all** members", "**In progress**",
-         "Commits from Varun and Yashika are on GitHub; Priyanshu and Advay still push their own commit (Part C)", "Priyanshu, Advay"],
+         "Commits from Varun, Yashika and Priyanshu are on GitHub; Advay still pushes his own commit (Part C)", "Advay"],
         ["**Individual contributions** clearly explained", "Done (document)", "`CONTRIBUTIONS.md`; Part C of this file", "Everyone"],
         ["**Every member understands the project**", "**TO DO**",
          "Each member reads Part B and rehearses the questions in §9 and Part C", "Everyone"],
@@ -370,7 +370,7 @@ MEMBERS = [
         ],
         "task": "Re-train the main model with a different random seed to check that our result is stable: "
                 "`python src/train_transformer.py --model muril --train_langs en hi bn --epochs 6 --seed 13 --tag muril_tt_seed13` "
-                "(~25 min). Commit `results/metrics/muril_tt_seed13.json` and add one line about the variation to `README.md`.",
+                "(~25 min). Commit `results/metrics/muril_tt_seed13.json` and add one line about the variation to `README.md`. **Done**: F1 Hi/Bn 0.648/0.624 vs 0.662/0.650 (seed 42).",
     },
     {
         "name": "Advay Sinha (S24CSEU2059)",
@@ -406,8 +406,8 @@ def part_c(doc):
               "For clarity, each member took **primary responsibility** for one area, listed below. That is the part "
               "they implemented, maintain and explain in depth, while helping on the others.")
     para(doc, "Every member must be able to explain the whole project (Part B) and, in detail, their own part. "
-              "The evaluation also checks **GitHub contributions from every member**. Varun and Yashika (unit tests for "
-              "preprocessing, `tests/test_preprocess.py`) have committed; Priyanshu and Advay must make **their own commit** "
+              "The evaluation also checks **GitHub contributions from every member**. Varun, Yashika (unit tests for "
+              "preprocessing) and Priyanshu (seed-13 stability check) have committed; Advay must make **his own commit** "
               "before the evaluation (the task under each name).")
     for m in MEMBERS:
         doc.add_heading(m["name"], level=2)
